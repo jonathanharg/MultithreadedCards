@@ -107,7 +107,7 @@ public class CardGame {
         for (int i = 0; i < lines.size(); i++) {
             try {
                 var cardValue = Integer.parseInt(lines.get(i));
-                if (cardValue < 1) {
+                if (cardValue < 0) {
                     throw new NumberFormatException();
                 }
                 cards[i] = new Card(cardValue);

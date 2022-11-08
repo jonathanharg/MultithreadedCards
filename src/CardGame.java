@@ -11,7 +11,7 @@ public class CardGame {
     public final int n;
     private final Deck[] decks;
     private final Player[] players;
-    private final boolean playerHasWon = false;
+    private boolean playerHasWon = false;
 
     public CardGame(int n, Path packPath) throws InvalidPackException, InvalidPlayerNumberException {
         if (n < 1)
@@ -49,8 +49,8 @@ public class CardGame {
                     deckPath = Path.of(askForDeckPath());
                     validPackPath = true;
                 }
-
-                new CardGame(numPlayers, deckPath);
+                CardGame cardGame = new CardGame(numPlayers, deckPath);
+                cardGame.testRun();
             } catch (InvalidPackException e) {
                 System.out.println(e.getMessage());
                 validPackPath = false;
@@ -133,8 +133,21 @@ public class CardGame {
             }
         }
     }
-}
 
+    public void testRun(){
+        while (playerHasWon == false){
+            for (int i = 0; i<n; i++){
+                players[i].takeTurn();
+                if (players[i].hasWon()){
+                    playerHasWon = true;
+                    System.out.println("player" + i + " has won!🥳");
+                    break;
+                }
+            }
+        }
+    }
+
+}
 
 
 class InvalidPackException extends Exception {

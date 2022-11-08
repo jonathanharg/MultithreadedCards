@@ -31,15 +31,17 @@ public class Player {
         return discardCards[randomIndex];
     }
 
-    public void run(){
+    public void takeTurn(){
         try{
             Card newCard = drawDeck.takeCard();
-            Card discardCard = selectDiscardCard();
+            Card discardCard = hand[0];
+//            Card discardCard = selectDiscardCard();
             swapCard(newCard, discardCard);
             discardDeck.addCard(discardCard);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public void createLog(){

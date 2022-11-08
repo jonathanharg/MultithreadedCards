@@ -1,4 +1,10 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 public class Deck {
 
@@ -20,7 +26,15 @@ public class Deck {
         return cards.take();
     }
 
-    public void createLog(){
-        System.out.println("TODO: 😂log deck to file");
+    public void log(){
+        Path path = Path.of("./deck" + number + "_output.txt");
+        try {
+            Files.writeString(
+                    path, this.toString(),
+                    CREATE
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

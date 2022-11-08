@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class Player {
 
@@ -7,6 +9,7 @@ public class Player {
     private Deck drawDeck;
     private Deck discardDeck;
     private ArrayList<String> log;
+    private Random random = new Random();
 
     public Player(int number, Deck drawDeck, Deck discardDeck) {
         this.number = number;
@@ -15,31 +18,43 @@ public class Player {
     }
 
     public boolean hasWon(){
-        return false;
-        //TODO: loops over thingy to see if they've won
+        Card first = hand[0];
+        for(int i = 1; i <= 3; i++){
+            if (first != hand[i]) return false;
+        }
+        return true;
     }
 
     private Card selectDiscardCard(){
-        return null;
-        // TOdo:
+        Card[] discardCards = (Card[]) Arrays.stream(hand).filter(x -> x.getValue() == number).toArray();
+        int randomIndex = random.nextInt(discardCards.length);
+        return discardCards[randomIndex];
     }
 
     public void run(){
-        //TODO: runs player, makes decisions
+        Card newCard = drawDeck.cards.take();
+        Card discardCard = selectDiscardCard();
+        swapCard(newCard, discardCard);
+        discardDeck.cards.put(discardCard);
     }
 
     public void createLog(){
         //TODO: converts arraylist into file
     }
 
-    public void addCard(Card card, int index){
-        hand[index] = card;
+    public void addCard(Card newCard, int index){
+        hand[index] = newCard;
     }
 
-    public Card swapCard(Card card, int index){
+    public Card swapCard(Card newCard, int index){
         Card oldCard = hand[index];
-        addCard(card, index);
+        addCard(newCard, index);
         return oldCard;
+    }
+
+    public Card swapCard(Card newCard, Card oldCard){
+        int index = Arrays.asList(hand).indexOf(oldCard);
+        return swapCard(newCard, index);
     }
 
     public String toString(){

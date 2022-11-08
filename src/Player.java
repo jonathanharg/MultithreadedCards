@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import static java.nio.file.StandardOpenOption.APPEND;
@@ -32,7 +33,7 @@ public class Player {
     }
 
     public Card selectDiscardCard(){
-        var discardCards = Arrays.stream(hand).filter(c -> c.getValue() != number).toArray(Card[]::new);
+        Card[] discardCards = Arrays.stream(hand).filter(c -> c.getValue() != number).toArray(Card[]::new);
         if (discardCards.length > 0){
             int randomIndex = random.nextInt(discardCards.length);
             return discardCards[randomIndex];
@@ -44,14 +45,15 @@ public class Player {
     public void takeTurn(){
         try{
             Card newCard = drawDeck.takeCard();
-            Card discardCard = hand[0];
-//            Card discardCard = selectDiscardCard();
+            Card discardCard = selectDiscardCard();
             swapCard(newCard, discardCard);
+            log(this + " draws a " + newCard + " from deck" + number);
             discardDeck.addCard(discardCard);
+            log(this + " discards a " + discardCard + " to deck" + (number+1));
+            log(this + " current hand is " + handToString());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void log(String message){
@@ -93,7 +95,7 @@ public class Player {
     }
 
     private String handToString(){
-        var cards = Arrays.stream(hand).map(c -> String.valueOf(c.getValue())).toList();
+        List<String> cards = Arrays.stream(hand).map(c -> String.valueOf(c.getValue())).toList();
         return String.join(", ", cards);
     }
 

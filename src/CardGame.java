@@ -30,6 +30,7 @@ public class CardGame {
         }
 
         Card[] cards = loadPack(packPath);
+        deal(cards);
     }
 
     public static void main(String[] args) {
@@ -120,9 +121,12 @@ public class CardGame {
         return cards;
     }
 
-    public void dealer (){
-        for (int i = 0; i < n/2; i++){
-            player[i%4].addCard
+    public void deal(Card[] cards){
+        for (int i = 0; i < 4*n; i++){
+            players[i%n].addCard(cards[i], i/n);
+        }
+        for (int i = (8*n)-1; i > (4*n)-1; i--){
+            decks[i%n].addCard(cards[i]);
         }
     }
 }

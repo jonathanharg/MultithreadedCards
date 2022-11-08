@@ -1,9 +1,11 @@
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Deck {
 
     private int number;
-    private BlockingQueue<Card> cards;
+    private LinkedBlockingQueue<Card> cards = new LinkedBlockingQueue<>();
 
     public Deck(int number) {
         this.number = number;
@@ -12,6 +14,9 @@ public class Deck {
     public String toString(){
 //        String.join(", ", cards.toArray())
         return "deck" + number + " contents: " + " TODO";
+    }
+    public void addCard(Card card){
+        cards.add(card);
     }
 
     public void createLog(){

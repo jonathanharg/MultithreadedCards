@@ -1,6 +1,12 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 public class Player {
 
@@ -48,8 +54,17 @@ public class Player {
 
     }
 
-    public void createLog(){
-        //TODO: converts arraylist into file
+    public void log(String message){
+        Path path = Path.of("./player" + number + "_output.txt");
+        try {
+            Files.writeString(
+                    path,
+                    message + System.lineSeparator(),
+                    CREATE, APPEND
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void addCard(Card newCard, int index){

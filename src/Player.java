@@ -15,7 +15,7 @@ public class Player {
     private final Card[] hand = new Card[4];
     private final Deck drawDeck;
     private final Deck discardDeck;
-    private ArrayList<String> log;
+
     private final Random random = new Random();
 
     public Player(int number, Deck drawDeck, Deck discardDeck) {
@@ -96,10 +96,10 @@ public class Player {
 
     private String handToString(){
         List<String> cards = Arrays.stream(hand).map(c -> String.valueOf(c.getValue())).toList();
-        return String.join(", ", cards);
+        return String.join(" ", cards);
     }
 
     public String toString(){
-        return "player" + number;
+        return "player " + number;
     }
 }

@@ -25,10 +25,14 @@ public class Player {
         return true;
     }
 
-    private Card selectDiscardCard(){
-        Card[] discardCards = (Card[]) Arrays.stream(hand).filter(x -> x.getValue() == number).toArray();
-        int randomIndex = random.nextInt(discardCards.length);
-        return discardCards[randomIndex];
+    public Card selectDiscardCard(){
+        var discardCards = Arrays.stream(hand).filter(c -> c.getValue() != number).toArray(Card[]::new);
+        if (discardCards.length > 0){
+            int randomIndex = random.nextInt(discardCards.length);
+            return discardCards[randomIndex];
+        } else {
+            return null;
+        }
     }
 
     public void takeTurn(){

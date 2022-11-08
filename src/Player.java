@@ -32,7 +32,7 @@ public class Player {
     }
 
     public Card selectDiscardCard(){
-        var discardCards = Arrays.stream(hand).filter(c -> c.getValue() != number).toArray(Card[]::new);
+        Card[] discardCards = Arrays.stream(hand).filter(c -> c.getValue() != number).toArray(Card[]::new);
         if (discardCards.length > 0){
             int randomIndex = random.nextInt(discardCards.length);
             return discardCards[randomIndex];
@@ -44,10 +44,12 @@ public class Player {
     public void takeTurn(){
         try{
             Card newCard = drawDeck.takeCard();
-            Card discardCard = hand[0];
-//            Card discardCard = selectDiscardCard();
+            Card discardCard = selectDiscardCard();
             swapCard(newCard, discardCard);
+            log(toString() + " draws a " + newCard + " from deck" + number);
             discardDeck.addCard(discardCard);
+            log(toString() + " discards a " + discardCard + " to deck" + (number+1));
+            log(toString() + " current hand is " + handToStirng());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

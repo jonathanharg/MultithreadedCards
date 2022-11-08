@@ -4,12 +4,12 @@ import java.util.Random;
 
 public class Player {
 
-    private int number;
-    private Card[] hand = new Card[4];
-    private Deck drawDeck;
-    private Deck discardDeck;
+    private final int number;
+    private final Card[] hand = new Card[4];
+    private final Deck drawDeck;
+    private final Deck discardDeck;
     private ArrayList<String> log;
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public Player(int number, Deck drawDeck, Deck discardDeck) {
         this.number = number;

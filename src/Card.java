@@ -26,10 +26,6 @@ public class Card {
 
         final Card other = (Card) obj;
 
-        if (this.value != other.getValue()) {
-            return false;
-        }
-
-        return true;
+        return this.value == other.getValue();
     }
 }

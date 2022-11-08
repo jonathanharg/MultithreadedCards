@@ -57,9 +57,6 @@ public class CardGame {
             } catch (InvalidPlayerNumberException e){
                 System.out.println(e.getMessage());
                 validNumPlayers = false;
-            } catch (InvalidPathException e){
-                System.out.println(e.getMessage());
-                validPackPath = false;
             }
         }
     }
@@ -94,7 +91,7 @@ public class CardGame {
 
     public Card[] loadPack(Path packPath) throws InvalidPackException {
         Card[] cards = new Card[8 * n];
-        List<String> lines = null;
+        List<String> lines;
         try {
             lines = Files.readAllLines(packPath);
         } catch (IOException e) {
@@ -135,12 +132,12 @@ public class CardGame {
     }
 
     public void testRun(){
-        while (playerHasWon == false){
+        while (!playerHasWon){
             for (int i = 0; i<n; i++){
                 players[i].takeTurn();
                 if (players[i].hasWon()){
                     playerHasWon = true;
-                    System.out.println("player" + i + " has won!🥳");
+                    System.out.println(players[i] + " has won! 🥳");
                     break;
                 }
             }

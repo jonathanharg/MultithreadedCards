@@ -1,18 +1,16 @@
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Deck {
 
-    private int number;
-    private LinkedBlockingQueue<Card> cards = new LinkedBlockingQueue<>();
+    private final int number;
+    private final LinkedBlockingQueue<Card> cards = new LinkedBlockingQueue<>();
 
     public Deck(int number) {
         this.number = number;
     }
 
     public String toString(){
-        return "deck" + number + " contents: " + cards.toString();
+        return "deck" + number + " contents: " + cards;
     }
     public void addCard(Card card) throws InterruptedException {
         cards.put(card);

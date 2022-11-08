@@ -20,15 +20,12 @@ class PlayerTest {
 
     private static <T> Stream<Arguments> decksGenerator(int[][] decks, List<T> result) {
         AtomicInteger i = new AtomicInteger();
-        return Arrays.stream(decks).map(deck -> {
-
-            return Arguments.of(new Card[]{
-                    new Card(deck[0]),
-                    new Card(deck[1]),
-                    new Card(deck[2]),
-                    new Card(deck[3])
-            }, result.get(i.getAndAdd(1)));
-        });
+        return Arrays.stream(decks).map(deck -> Arguments.of(new Card[]{
+                new Card(deck[0]),
+                new Card(deck[1]),
+                new Card(deck[2]),
+                new Card(deck[3])
+        }, result.get(i.getAndAdd(1))));
     }
 
     private static Stream<Arguments> hasWonGenerator() {

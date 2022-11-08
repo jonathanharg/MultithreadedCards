@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import static java.nio.file.StandardOpenOption.APPEND;
@@ -46,14 +47,13 @@ public class Player {
             Card newCard = drawDeck.takeCard();
             Card discardCard = selectDiscardCard();
             swapCard(newCard, discardCard);
-            log(toString() + " draws a " + newCard + " from deck" + number);
+            log(this + " draws a " + newCard + " from deck" + number);
             discardDeck.addCard(discardCard);
-            log(toString() + " discards a " + discardCard + " to deck" + (number+1));
-            log(toString() + " current hand is " + handToStirng());
+            log(this + " discards a " + discardCard + " to deck" + (number+1));
+            log(this + " current hand is " + handToString());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void log(String message){
@@ -90,7 +90,7 @@ public class Player {
     }
 
     private String handToString(){
-        var cards = Arrays.stream(hand).map(c -> String.valueOf(c.getValue())).toList();
+        List<String> cards = Arrays.stream(hand).map(c -> String.valueOf(c.getValue())).toList();
         return String.join(", ", cards);
     }
 

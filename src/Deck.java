@@ -12,11 +12,14 @@ public class Deck {
     }
 
     public String toString(){
-//        String.join(", ", cards.toArray())
-        return "deck" + number + " contents: " + " TODO";
+        return "deck" + number + " contents: " + cards.toString();
     }
-    public void addCard(Card card){
-        cards.add(card);
+    public void addCard(Card card) throws InterruptedException {
+        cards.put(card);
+    }
+
+    public Card takeCard() throws InterruptedException {
+        return cards.take();
     }
 
     public void createLog(){

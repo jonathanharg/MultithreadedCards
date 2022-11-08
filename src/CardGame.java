@@ -126,7 +126,11 @@ public class CardGame {
             players[i%n].addCard(cards[i], i/n);
         }
         for (int i = (8*n)-1; i > (4*n)-1; i--){
-            decks[i%n].addCard(cards[i]);
+            try {
+                decks[i%n].addCard(cards[i]);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

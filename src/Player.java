@@ -20,7 +20,7 @@ public class Player {
     public boolean hasWon(){
         Card first = hand[0];
         for(int i = 1; i <= 3; i++){
-            if (first != hand[i]) return false;
+            if (first.getValue() != hand[i].getValue()) return false;
         }
         return true;
     }
@@ -32,10 +32,14 @@ public class Player {
     }
 
     public void run(){
-        Card newCard = drawDeck.cards.take();
-        Card discardCard = selectDiscardCard();
-        swapCard(newCard, discardCard);
-        discardDeck.cards.put(discardCard);
+        try{
+            Card newCard = drawDeck.takeCard();
+            Card discardCard = selectDiscardCard();
+            swapCard(newCard, discardCard);
+            discardDeck.addCard(discardCard);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void createLog(){

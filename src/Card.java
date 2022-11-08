@@ -9,6 +9,7 @@ public class Card {
         return value;
     }
 
+    @Override
     public String toString(){
         return "card " + value;
     }

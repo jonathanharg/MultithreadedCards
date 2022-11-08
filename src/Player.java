@@ -67,6 +67,11 @@ public class Player {
         }
     }
 
+    public void finalLog(){
+        log("player %s exits".formatted(number));
+        log("player %s hand: %s".formatted(number, handToString()));
+    }
+
     public void addCard(Card newCard, int index){
         hand[index] = newCard;
     }
@@ -80,6 +85,11 @@ public class Player {
     public Card swapCard(Card newCard, Card oldCard){
         int index = Arrays.asList(hand).indexOf(oldCard);
         return swapCard(newCard, index);
+    }
+
+    private String handToString(){
+        var cards = Arrays.stream(hand).map(c -> String.valueOf(c.getValue())).toList();
+        return String.join(", ", cards);
     }
 
     public String toString(){

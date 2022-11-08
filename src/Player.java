@@ -32,6 +32,16 @@ public class Player {
         //TODO: converts arraylist into file
     }
 
+    public void addCard(Card card, int index){
+        hand[index] = card;
+    }
+
+    public Card swapCard(Card card, int index){
+        Card oldCard = hand[index];
+        addCard(card, index);
+        return oldCard;
+    }
+
     public String toString(){
         return "player" + number;
     }

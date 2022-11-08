@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,11 +42,7 @@ public class CardGame {
             try {
                 if (!validNumPlayers) {
                     numPlayers = askForNumber();
-                    if (numPlayers < 1){
-                        throw new InvalidPlayerNumberException("The game must have a non-zero number of players, but was %d!".formatted(numPlayers));
-                    } else {
-                        validNumPlayers = true;
-                    }
+                    validNumPlayers = true;
                 }
                 if (!validPackPath) {
                     deckPath = Path.of(askForDeckPath());
@@ -69,19 +66,23 @@ public class CardGame {
     private static int askForNumber() {
         Scanner scanner = new Scanner(System.in);
         var givenValidInt = false;
-        int n = 1; // Default value
+        int numPlayers = 1; // Default value
         while (!givenValidInt) {  // Keep asking for a number until a valid one is provided
             System.out.println("Please enter the number of players:");
             try {
-                n = scanner.nextInt();
-                givenValidInt = true;
+                numPlayers = scanner.nextInt();
+                if (numPlayers < 1){
+                    throw new InputMismatchException("The game must have a non-zero number of players, but was %d!".formatted(numPlayers));
+                } else {
+                    givenValidInt = true;
+                }
             } catch (java.util.InputMismatchException e) {
-                System.out.println("The number of players must be a positive integer!");
+                System.out.println("The number of players must be a positive integer! " + e.getMessage());
                 scanner.nextLine();
                 scanner.reset();
             }
         }
-        return n;
+        return numPlayers;
     }
 
     private static String askForDeckPath() {

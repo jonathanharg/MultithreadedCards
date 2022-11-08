@@ -29,12 +29,12 @@ public class CardGame {
             players[i] = new Player(i + 1, decks[i], decks[(i + 1) % n]);
         }
 
-        var cards = loadPack(packPath);
+        Card[] cards = loadPack(packPath);
     }
 
     public static void main(String[] args) {
-        var validNumPlayers = false;
-        var validPackPath = false;
+        boolean validNumPlayers = false;
+        boolean validPackPath = false;
         int numPlayers = 0;
         Path deckPath = null;
 
@@ -92,7 +92,7 @@ public class CardGame {
     }
 
     public Card[] loadPack(Path packPath) throws InvalidPackException {
-        var cards = new Card[8 * n];
+        Card[] cards = new Card[8 * n];
         List<String> lines = null;
         try {
             lines = Files.readAllLines(packPath);
@@ -101,25 +101,33 @@ public class CardGame {
             throw new InvalidPackException("Error loading pack %s. IO Error: %s.".formatted(packPath, e.getMessage()));
         }
         if (lines.size() != 8 * n) {
-            var errorString = "A decks length must be 8n (%d), but the supplied deck was %s.";
+            String errorString = "A decks length must be 8n (%d), but the supplied deck was %s.";
             throw new InvalidPackException(errorString.formatted(8 * n, lines.size()));
         }
 
         for (int i = 0; i < lines.size(); i++) {
             try {
-                var cardValue = Integer.parseInt(lines.get(i));
+                int cardValue = Integer.parseInt(lines.get(i));
                 if (cardValue < 0) {
                     throw new NumberFormatException();
                 }
                 cards[i] = new Card(cardValue);
             } catch (NumberFormatException e) {
-                var errorString = "Invalid card value on line %d of %s. Each line must be a non-negative integer.";
+                String errorString = "Invalid card value on line %d of %s. Each line must be a non-negative integer.";
                 throw new InvalidPackException(errorString.formatted(i, packPath.toString()));
             }
         }
         return cards;
     }
+
+    public void dealer (){
+        for (int i = 0; i < n/2; i++){
+            player[i%4].addCard
+        }
+    }
 }
+
+
 
 class InvalidPackException extends Exception {
     public InvalidPackException(String str) {

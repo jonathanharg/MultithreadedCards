@@ -67,9 +67,14 @@ public class Player {
         }
     }
 
-    public void finalLog(){
-        log("player %s exits".formatted(number));
-        log("player %s hand: %s".formatted(number, handToString()));
+    public void finalLog(Player winner){
+        if (winner == this) {
+            log(this + "wins");
+        } else {
+            log(winner + " has informed " + this + "that " + winner + "has won");
+        }
+        log(this + " exits");
+        log(this + " hand: " + handToString());
     }
 
     public void addCard(Card newCard, int index){

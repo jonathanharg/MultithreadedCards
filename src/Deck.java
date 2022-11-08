@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import static java.nio.file.StandardOpenOption.APPEND;
@@ -16,7 +18,8 @@ public class Deck {
     }
 
     public String toString(){
-        return "deck" + number + " contents: " + cards;
+        List<String> cardList = cards.stream().map(c -> String.valueOf(c.getValue())).toList();
+        return "deck" + number + " contents: " + String.join(", ", cardList);
     }
     public void addCard(Card card) throws InterruptedException {
         cards.put(card);

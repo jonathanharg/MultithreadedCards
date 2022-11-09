@@ -5,6 +5,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
+
 public class CardGame {
     public static CardGame currentGame;
     public final int n;
@@ -53,7 +56,7 @@ public class CardGame {
             } catch (InvalidPackException e) {
                 System.out.println(e.getMessage());
                 validPackPath = false;
-            } catch (InvalidPlayerNumberException e){
+            } catch (InvalidPlayerNumberException e) {
                 System.out.println(e.getMessage());
                 validNumPlayers = false;
             }
@@ -68,7 +71,7 @@ public class CardGame {
             System.out.println("Please enter the number of players:");
             try {
                 numPlayers = scanner.nextInt();
-                if (numPlayers < 1){
+                if (numPlayers < 1) {
                     throw new InputMismatchException("The game must have a non-zero number of players, but was %d!".formatted(numPlayers));
                 } else {
                     givenValidInt = true;
@@ -117,31 +120,30 @@ public class CardGame {
         return cards;
     }
 
-    public void deal(Card[] cards){
-        for (int i = 0; i < 4*n; i++){
-            players[i%n].addCard(cards[i], i/n);
+    public void deal(Card[] cards) {
+        for (int i = 0; i < 4 * n; i++) {
+            players[i % n].addCard(cards[i], i / n);
         }
-        for (int i = (8*n)-1; i > (4*n)-1; i--){
+        for (int i = (8 * n) - 1; i > (4 * n) - 1; i--) {
             try {
-                decks[i%n].addCard(cards[i]);
+                decks[i % n].addCard(cards[i]);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
     }
 
-    public void testRun(){
-        Player winner= null;
+    public void testRun() {
+        Player winner = null;
         for (int i = 0; i < n; i++) {
-            players[i].log(players[i] + " initial hand " + players[i].handToString());
-            decks[i].log();
+            players[i].log(players[i] + " initial hand " + players[i].handToString(), CREATE, TRUNCATE_EXISTING);
         }
-        while (!playerHasWon){
-            for (int i = 0; i<n; i++){
+        while (!playerHasWon) {
+            for (int i = 0; i < n; i++) {
                 players[i].takeTurn();
             }
-            for (int i = 0; i<n; i++){
-                if (players[i].hasWon()){
+            for (int i = 0; i < n; i++) {
+                if (players[i].hasWon()) {
                     playerHasWon = true;
                     winner = players[i];
                     break;
@@ -151,7 +153,7 @@ public class CardGame {
         System.out.println(winner + " has won! 🥳");
         for (int i = 0; i < n; i++) {
             players[i].finalLog(winner);
-            decks[i].log();
+            decks[i].finalLog();
         }
         System.out.println("done");
 

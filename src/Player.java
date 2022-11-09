@@ -1,12 +1,12 @@
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.CREATE;
 
 public class Player {
 
@@ -58,18 +58,17 @@ public class Player {
         }
     }
 
-    // FIXME: If a log file already exists before the game, we will add to it, but instead we should probably delete it and make a new file
-    public void log(String message) {
+    public void log(String message, OpenOption... options) {
         Path path = Path.of("./player" + number + "_output.txt");
         try {
-            Files.writeString(
-                    path,
-                    message + System.lineSeparator(),
-                    CREATE, APPEND
-            );
+            Files.writeString(path, message + System.lineSeparator(), options);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void log(String message) {
+        log(message, APPEND); // Log appends by default unless otherwise stated.
     }
 
     public void finalLog(Player winner) {

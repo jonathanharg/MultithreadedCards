@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 public class Deck {
 
@@ -28,11 +29,10 @@ public class Deck {
         return cards.take();
     }
 
-    public void log() {
+    public void finalLog() {
         Path path = Path.of("./deck" + number + "_output.txt");
-        System.out.println(this + "|");
         try {
-            Files.writeString(path, this.toString(), CREATE);
+            Files.writeString(path, this.toString(), CREATE, TRUNCATE_EXISTING); // Will any overwrite existing files
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

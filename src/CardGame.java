@@ -11,9 +11,18 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 
 public class CardGame {
     public static CardGame currentGame;
-    public final int n;
+    private final int n;
     private final Deck[] decks;
     private final Player[] players;
+
+    public boolean hasPlayerWon() {
+        return playerHasWon;
+    }
+
+    public void setPlayerHasWon() {
+        this.playerHasWon = true;
+    }
+
     private boolean playerHasWon = false;
 
     public CardGame(int n, Path packPath) throws InvalidPackException, InvalidPlayerNumberException {
@@ -110,7 +119,7 @@ public class CardGame {
         return scanner.nextLine();
     }
 
-    public Card[] loadPack(Path packPath) throws InvalidPackException {
+    private Card[] loadPack(Path packPath) throws InvalidPackException {
         Card[] cards = new Card[8 * n];
         List<String> lines;
         try {
@@ -139,7 +148,7 @@ public class CardGame {
         return cards;
     }
 
-    public void deal(Card[] cards) {
+    private void deal(Card[] cards) {
         for (int i = 0; i < 4 * n; i++) {
             players[i % n].addCard(cards[i], i / n);
         }
@@ -156,6 +165,10 @@ public class CardGame {
         Player winner = null;
         for (int i = 0; i < n; i++) {
             players[i].log(players[i] + " initial hand " + players[i].handToString(), CREATE, TRUNCATE_EXISTING);
+            if (players[i].hasWon() && winner == null){
+                winner = players[i];
+                playerHasWon = true;
+            }
         }
         while (!playerHasWon) {
             for (int i = 0; i < n; i++) {

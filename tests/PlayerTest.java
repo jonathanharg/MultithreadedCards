@@ -37,27 +37,17 @@ class PlayerTest {
         return decksGenerator(decks, results);
     }
 
-    private static Stream<Arguments> selectDiscardCardGenerator_NotEquals() {
-        int[][] decks = new int[][]{
-                {2, 2, 2, 2},
-                {1, 2, 3, 4},
-                {1, 1, 3, 4},
-                {1, 1, 1, 3},
-//                {1, 1, 1, 1},
-        };
-        List<Integer> results = List.of(1, 1, 1, 1);
-        return decksGenerator(decks, results);
-    }
-
-    private static Stream<Arguments> selectDiscardCardGenerator_Equals() {
+    private static Stream<Arguments> selectDiscardCardGenerator() {
         int[][] decks = new int[][]{
                 {2, 2, 2, 2},
                 {1, 2, 2, 2},
                 {1, 1, 2, 2},
                 {1, 1, 1, 2},
-//                {1, 1, 1, 1},
+                {1, 5, 6, 7},
+                {1, 1, 5, 6},
+                {1, 1, 1, 5}
         };
-        List<Integer> results = List.of(2, 2, 2, 2);
+        List<Integer> results = List.of(2, 2, 2, 2, 5, 6, 5);
         return decksGenerator(decks, results);
     }
 
@@ -98,17 +88,8 @@ class PlayerTest {
     }
 
     @ParameterizedTest
-    @MethodSource("selectDiscardCardGenerator_NotEquals")
-    void selectDiscardCard_NotEquals(Card[] cards, Integer value) {
-        for (int i = 0; i < 4; i++) {
-            player.addCard(cards[i], i);
-        }
-        assertNotEquals(value, player.selectDiscardCard().getValue());
-    }
-
-    @ParameterizedTest
-    @MethodSource("selectDiscardCardGenerator_Equals")
-    void selectDiscardCard_Equals(Card[] cards, Integer value) {
+    @MethodSource("selectDiscardCardGenerator")
+    void selectDiscardCard(Card[] cards, Integer value) {
         for (int i = 0; i < 4; i++) {
             player.addCard(cards[i], i);
         }

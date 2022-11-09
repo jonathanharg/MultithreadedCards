@@ -131,16 +131,30 @@ public class CardGame {
     }
 
     public void testRun(){
+        Player winner= null;
+        for (int i = 0; i < n; i++) {
+            players[i].log(players[i] + " initial hand " + players[i].handToString());
+            decks[i].log();
+        }
         while (!playerHasWon){
             for (int i = 0; i<n; i++){
                 players[i].takeTurn();
+            }
+            for (int i = 0; i<n; i++){
                 if (players[i].hasWon()){
                     playerHasWon = true;
-                    System.out.println(players[i] + " has won! 🥳");
+                    winner = players[i];
                     break;
                 }
             }
         }
+        System.out.println(winner + " has won! 🥳");
+        for (int i = 0; i < n; i++) {
+            players[i].finalLog(winner);
+            decks[i].log();
+        }
+        System.out.println("done");
+
     }
 
 }

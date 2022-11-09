@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -22,19 +21,22 @@ public class Player {
         this.number = number;
         this.drawDeck = drawDeck;
         this.discardDeck = discardDeck;
+
+        // Makes players "random" choices predictable for debugging. TODO: Remove later or add as variable?
+        random.setSeed(number);
     }
 
-    public boolean hasWon(){
+    public boolean hasWon() {
         Card first = hand[0];
-        for(int i = 1; i <= 3; i++){
+        for (int i = 1; i <= 3; i++) {
             if (first.getValue() != hand[i].getValue()) return false;
         }
         return true;
     }
 
-    public Card selectDiscardCard(){
+    public Card selectDiscardCard() {
         Card[] discardCards = Arrays.stream(hand).filter(c -> c.getValue() != number).toArray(Card[]::new);
-        if (discardCards.length > 0){
+        if (discardCards.length > 0) {
             int randomIndex = random.nextInt(discardCards.length);
             return discardCards[randomIndex];
         } else {
@@ -42,21 +44,22 @@ public class Player {
         }
     }
 
-    public void takeTurn(){
-        try{
+    public void takeTurn() {
+        try {
             Card newCard = drawDeck.takeCard();
             Card discardCard = selectDiscardCard();
             swapCard(newCard, discardCard);
             log(this + " draws a " + newCard + " from deck" + number);
             discardDeck.addCard(discardCard);
-            log(this + " discards a " + discardCard + " to deck" + (number+1));
+            log(this + " discards a " + discardCard + " to deck" + (number + 1));
             log(this + " current hand is " + handToString());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void log(String message){
+    // FIXME: If a log file already exists before the game, we will add to it, but instead we should probably delete it and make a new file
+    public void log(String message) {
         Path path = Path.of("./player" + number + "_output.txt");
         try {
             Files.writeString(
@@ -69,37 +72,37 @@ public class Player {
         }
     }
 
-    public void finalLog(Player winner){
+    public void finalLog(Player winner) {
         if (winner == this) {
-            log(this + "wins");
+            log(this + " wins");
         } else {
-            log(winner + " has informed " + this + "that " + winner + "has won");
+            log(winner + " has informed " + this + " that " + winner + " has won");
         }
         log(this + " exits");
         log(this + " hand: " + handToString());
     }
 
-    public void addCard(Card newCard, int index){
+    public void addCard(Card newCard, int index) {
         hand[index] = newCard;
     }
 
-    public Card swapCard(Card newCard, int index){
+    public Card swapCard(Card newCard, int index) {
         Card oldCard = hand[index];
         addCard(newCard, index);
         return oldCard;
     }
 
-    public Card swapCard(Card newCard, Card oldCard){
+    public Card swapCard(Card newCard, Card oldCard) {
         int index = Arrays.asList(hand).indexOf(oldCard);
         return swapCard(newCard, index);
     }
 
-    private String handToString(){
+    public String handToString() {
         List<String> cards = Arrays.stream(hand).map(c -> String.valueOf(c.getValue())).toList();
         return String.join(" ", cards);
     }
 
-    public String toString(){
+    public String toString() {
         return "player " + number;
     }
 }

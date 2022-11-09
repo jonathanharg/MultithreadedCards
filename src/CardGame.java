@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -41,7 +42,25 @@ public class CardGame {
         int numPlayers = 0;
         Path deckPath = null;
 
-        while (!validPackPath || !validNumPlayers) {
+        if (args.length > 0) {
+            try {
+                numPlayers = Integer.parseInt(args[0]);
+                validNumPlayers = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number of players passed as argument.");
+            }
+        }
+
+        if (args.length > 1) {
+            try {
+                deckPath = Path.of(args[1]);
+                validPackPath = true;
+            } catch (InvalidPathException e) {
+                System.out.println("Invalid deck file passed as argument.");
+            }
+        }
+
+        do {
             try {
                 if (!validNumPlayers) {
                     numPlayers = askForNumber();
@@ -60,7 +79,7 @@ public class CardGame {
                 System.out.println(e.getMessage());
                 validNumPlayers = false;
             }
-        }
+        } while (!validPackPath || !validNumPlayers);
     }
 
     private static int askForNumber() {

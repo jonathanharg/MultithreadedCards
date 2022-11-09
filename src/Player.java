@@ -59,7 +59,7 @@ public class Player {
     }
 
     public void log(String message, OpenOption... options) {
-        Path path = Path.of("./player" + number + "_output.txt");
+        Path path = Path.of(System.getProperty("user.dir") + "/player" + number + "_output.txt");
         try {
             Files.writeString(path, message + System.lineSeparator(), options);
         } catch (IOException e) {
@@ -97,7 +97,7 @@ public class Player {
     }
 
     public String handToString() {
-        List<String> cards = Arrays.stream(hand).map(c -> String.valueOf(c.getValue())).toList();
+        List<String> cards = Arrays.stream(hand).map(c -> (c != null) ? String.valueOf(c.getValue()) : "empty").toList();
         return String.join(" ", cards);
     }
 

@@ -30,7 +30,7 @@ public class Deck {
     }
 
     public void finalLog() {
-        Path path = Path.of("./deck" + number + "_output.txt");
+        Path path = Path.of(System.getProperty("user.dir") + "/deck" + number + "_output.txt");
         try {
             Files.writeString(path, this.toString(), CREATE, TRUNCATE_EXISTING); // Will any overwrite existing files
         } catch (IOException e) {

@@ -1,7 +1,7 @@
 public class Card {
     private final int value; //card number
 
-    public Card(int value){
+    public Card(int value) {
         this.value = value;
     }
 
@@ -10,12 +10,12 @@ public class Card {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "card " + value;
     }
 
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }

@@ -6,11 +6,23 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
+
 public class CardGame {
     public static CardGame currentGame;
-    public final int n;
+    private final int n;
     private final Deck[] decks;
     private final Player[] players;
+
+    public boolean hasPlayerWon() {
+        return playerHasWon;
+    }
+
+    public void setPlayerHasWon() {
+        this.playerHasWon = true;
+    }
+
     private boolean playerHasWon = false;
 
     public CardGame(int n, Path packPath) throws InvalidPackException, InvalidPlayerNumberException {
@@ -39,7 +51,25 @@ public class CardGame {
         int numPlayers = 0;
         Path deckPath = null;
 
-        while (!validPackPath || !validNumPlayers) {
+        if (args.length > 0) {
+            try {
+                numPlayers = Integer.parseInt(args[0]);
+                validNumPlayers = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number of players passed as argument.");
+            }
+        }
+
+        if (args.length > 1) {
+            try {
+                deckPath = Path.of(args[1]);
+                validPackPath = true;
+            } catch (InvalidPathException e) {
+                System.out.println("Invalid deck file passed as argument.");
+            }
+        }
+
+        do {
             try {
                 if (!validNumPlayers) {
                     numPlayers = askForNumber();
@@ -54,11 +84,11 @@ public class CardGame {
             } catch (InvalidPackException e) {
                 System.out.println(e.getMessage());
                 validPackPath = false;
-            } catch (InvalidPlayerNumberException e){
+            } catch (InvalidPlayerNumberException e) {
                 System.out.println(e.getMessage());
                 validNumPlayers = false;
             }
-        }
+        } while (!validPackPath || !validNumPlayers);
     }
 
     private static int askForNumber() {
@@ -69,7 +99,7 @@ public class CardGame {
             System.out.println("Please enter the number of players:");
             try {
                 numPlayers = scanner.nextInt();
-                if (numPlayers < 1){
+                if (numPlayers < 1) {
                     throw new InputMismatchException("The game must have a non-zero number of players, but was %d!".formatted(numPlayers));
                 } else {
                     givenValidInt = true;
@@ -89,7 +119,7 @@ public class CardGame {
         return scanner.nextLine();
     }
 
-    public Card[] loadPack(Path packPath) throws InvalidPackException {
+    private Card[] loadPack(Path packPath) throws InvalidPackException {
         Card[] cards = new Card[8 * n];
         List<String> lines;
         try {
@@ -118,30 +148,47 @@ public class CardGame {
         return cards;
     }
 
-    public void deal(Card[] cards){
-        for (int i = 0; i < 4*n; i++){
-            players[i%n].addCard(cards[i], i/n);
+    private void deal(Card[] cards) {
+        for (int i = 0; i < 4 * n; i++) {
+            players[i % n].addCard(cards[i], i / n);
         }
-        for (int i = (8*n)-1; i > (4*n)-1; i--){
+        for (int i = (8 * n) - 1; i > (4 * n) - 1; i--) {
             try {
-                decks[i%n].addCard(cards[i]);
+                decks[i % n].addCard(cards[i]);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
     }
 
-    public void testRun(){
-        while (!playerHasWon){
-            for (int i = 0; i<n; i++){
+    public void testRun() {
+        Player winner = null;
+        for (int i = 0; i < n; i++) {
+            players[i].log(players[i] + " initial hand " + players[i].handToString(), CREATE, TRUNCATE_EXISTING);
+            if (players[i].hasWon() && winner == null){
+                winner = players[i];
+                playerHasWon = true;
+            }
+        }
+        while (!playerHasWon) {
+            for (int i = 0; i < n; i++) {
                 players[i].takeTurn();
-                if (players[i].hasWon()){
+            }
+            for (int i = 0; i < n; i++) {
+                if (players[i].hasWon()) {
                     playerHasWon = true;
-                    System.out.println(players[i] + " has won! 🥳😹");
+                    winner = players[i];
                     break;
                 }
             }
         }
+        System.out.println(winner + " has won! 🥳");
+        for (int i = 0; i < n; i++) {
+            players[i].finalLog(winner);
+            decks[i].finalLog();
+        }
+        System.out.println("done");
+
     }
 
 }

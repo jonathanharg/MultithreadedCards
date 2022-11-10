@@ -8,7 +8,7 @@ import java.util.Random;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 
-public class Player {
+public class Player implements Runnable{
 
     private final int number;
     private final Card[] hand = new Card[4];
@@ -26,7 +26,7 @@ public class Player {
         random.setSeed(number);
     }
 
-    public boolean hasWon() {
+    public boolean hasFinished() {
         Card first = hand[0];
         for (int i = 1; i <= 3; i++) {
             if (first.getValue() != hand[i].getValue()) return false;
@@ -103,5 +103,16 @@ public class Player {
 
     public String toString() {
         return "player " + number;
+    }
+
+    @Override
+    public void run() {
+        while(!CardGame.currentGame.hasPlayerWon()){
+            this.takeTurn();
+            if (this.hasFinished()){
+                CardGame.currentGame.notifyPlayerFinished();
+            }
+        }
+        System.out.println(this + " finished");
     }
 }

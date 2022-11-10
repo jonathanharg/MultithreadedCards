@@ -66,7 +66,7 @@ class PlayerTest {
         for (int i = 0; i < 4; i++) {
             player.addCard(cards[i], i);
         }
-        assertEquals(value, player.hasWon());
+        assertEquals(value, player.hasFinished());
     }
 
     @Test

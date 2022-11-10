@@ -29,5 +29,3 @@ bin/
 .DS_Store
 deck*.txt
 *_output.txt
-.idea/workspace.xml
-MultithreadedCards.iml

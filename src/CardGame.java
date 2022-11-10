@@ -137,7 +137,7 @@ public class CardGame {
                 players[i].takeTurn();
                 if (players[i].hasWon()){
                     playerHasWon = true;
-                    System.out.println(players[i] + " has won! 🥳");
+                    System.out.println(players[i] + " has won! 🥳😹");
                     break;
                 }
             }

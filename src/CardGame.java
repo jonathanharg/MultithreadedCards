@@ -177,14 +177,17 @@ public class CardGame {
 
   public void runThreadedGame() {
     for (int i = 0; i < n; i++) {
+      //logs initial hands of each player
       players[i].log(
           players[i] + " initial hand " + players[i].handToString(), CREATE, TRUNCATE_EXISTING);
       if (players[i].hasWinningHand() && null == winner) {
+        // sets winning player once a player has won and no other player has
         winner = players[i];
         playerHasWon = true;
       }
     }
     for (int i = 0; i < n; i++) {
+      //Threads each player
       Thread player = new Thread(players[i]);
       player.start();
     }

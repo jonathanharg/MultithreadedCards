@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80c7ba0b-d75d-4399-8c37-4e571a7215fc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/TestUtilities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MultithreadedCards.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MultithreadedCards.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/CardGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CardGameTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/PlayerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -81,10 +81,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in MultithreadedCards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CardGameTest.ThreadedSameAsSequential" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MultithreadedCards" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="CardGameTest" />
+      <option name="METHOD_NAME" value="ThreadedSameAsSequential" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -119,11 +121,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardGameTest.validPlayerInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CardGameTest.mainArgsDeckPath" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MultithreadedCards" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CardGameTest" />
-      <option name="METHOD_NAME" value="validPlayerInput" />
+      <option name="METHOD_NAME" value="mainArgsDeckPath" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -148,19 +150,19 @@
     <list>
       <item itemvalue="Application.Run Main" />
       <item itemvalue="JUnit.Test All" />
+      <item itemvalue="JUnit.CardGameTest.ThreadedSameAsSequential" />
+      <item itemvalue="JUnit.CardGameTest.mainArgsDeckPath" />
       <item itemvalue="JUnit.CardGameTest.deal" />
       <item itemvalue="JUnit.CardGameTest.invalidPlayerInput" />
       <item itemvalue="JUnit.CardGameTest.invalidPlayerInput (1)" />
-      <item itemvalue="JUnit.CardGameTest.validPlayerInput" />
-      <item itemvalue="JUnit.All in MultithreadedCards" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.CardGameTest.deal" />
+        <item itemvalue="JUnit.CardGameTest.ThreadedSameAsSequential" />
+        <item itemvalue="JUnit.CardGameTest.mainArgsDeckPath" />
         <item itemvalue="JUnit.CardGameTest.invalidPlayerInput (1)" />
         <item itemvalue="JUnit.CardGameTest.invalidPlayerInput" />
-        <item itemvalue="JUnit.CardGameTest.validPlayerInput" />
-        <item itemvalue="JUnit.All in MultithreadedCards" />
       </list>
     </recent_temporary>
   </component>
@@ -186,11 +188,40 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/TestUtilities.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/TestUtilities.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/TestUtilities.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.lang.reflect.Method" memberName="root" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MultithreadedCards$All_in_MultithreadedCards.ic" NAME="All in MultithreadedCards Coverage Results" MODIFIED="1668011672588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/MultithreadedCards$Run_Main.ic" NAME="Run Main Coverage Results" MODIFIED="1668032777252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/MultithreadedCards$Test_All.ic" NAME="Test All Coverage Results" MODIFIED="1668036824872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/MultithreadedCards$All_in_MultithreadedCards.ic" NAME="All in MultithreadedCards Coverage Results" MODIFIED="1668011672588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

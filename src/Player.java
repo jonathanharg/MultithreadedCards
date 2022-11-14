@@ -22,7 +22,7 @@ public class Player implements Runnable{
         this.drawDeck = drawDeck;
         this.discardDeck = discardDeck;
 
-        // Makes players "random" choices predictable for debugging. TODO: Remove later or add as variable?
+        // Makes players "random" choices predictable for debugging.
         random.setSeed(number);
     }
 
@@ -47,12 +47,13 @@ public class Player implements Runnable{
     public void takeTurn() {
         try {
             Card newCard = drawDeck.takeCard();
-            Card discardCard = selectDiscardCard();
+            Card discardCard = selectDiscardCard(); // Note: Cannot discard a card you just picked up
             swapCard(newCard, discardCard);
             log(this + " draws a " + newCard + " from deck" + number);
             discardDeck.addCard(discardCard);
             log(this + " discards a " + discardCard + " to deck" + (number + 1));
             log(this + " current hand is " + handToString());
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

@@ -21,35 +21,25 @@ class PlayerTest {
     static Deck discardDeck;
     static Player player;
 
-    private static <T> Stream<Arguments> decksGenerator(int[][] decks, List<T> result) {
-        AtomicInteger i = new AtomicInteger();
-        return Arrays.stream(decks).map(deck -> Arguments.of(new Card[]{new Card(deck[0]), new Card(deck[1]), new Card(deck[2]), new Card(deck[3])}, result.get(i.getAndAdd(1))));
-    }
-
     private static Stream<Arguments> hasWonGenerator() {
         int[][] decks = new int[][]{{1, 2, 3, 4}, {2, 2, 2, 2}, {1, 1, 1, 1}, {1, 1, 1, 3},};
         List<Boolean> results = List.of(false, true, true, false);
-        return decksGenerator(decks, results);
+        return TestUtilities.decksGenerator(decks, results);
     }
 
     private static Stream<Arguments> selectDiscardCardGenerator() {
         int[][] decks = new int[][]{{2, 2, 2, 2}, {1, 2, 2, 2}, {1, 1, 2, 2}, {1, 1, 1, 2}, {1, 5, 6, 7}, {1, 1, 5, 6}, {1, 1, 1, 5}};
         List<Integer> results = List.of(2, 2, 2, 2, 5, 6, 5);
-        return decksGenerator(decks, results);
+        return TestUtilities.decksGenerator(decks, results);
     }
 
     @BeforeAll
-    static void clean() {
-        File directory = new File(System.getProperty("user.dir"));
-        for (File f : directory.listFiles()) {
-            if (f.getName().endsWith("_output.txt")) {
-                f.delete();
-            }
-        }
+    static void beforeAll() {
+        TestUtilities.clean();
     }
 
     @BeforeEach
-    void setUp() {
+    void beforeEach() {
         drawDeck = new Deck(1);
         discardDeck = new Deck(2);
         player = new Player(1, drawDeck, discardDeck);
@@ -57,7 +47,7 @@ class PlayerTest {
 
     @AfterEach
     void afterEach() {
-        clean();
+        TestUtilities.clean();
     }
 
     @ParameterizedTest

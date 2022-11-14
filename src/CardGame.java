@@ -73,7 +73,7 @@ public class CardGame {
                     validPackPath = true;
                 }
                 CardGame cardGame = new CardGame(numPlayers, deckPath);
-//                cardGame.testRun();
+//                cardGame.runSequentialGame();
                 cardGame.runThreadedGame();
             } catch (InvalidPackException e) {
                 System.out.println(e.getMessage());

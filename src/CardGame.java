@@ -27,10 +27,12 @@ public class CardGame {
     players = new Player[n];
     currentGame = this;
 
+    //creates n number of decks
     for (int i = 0; i < n; i++) {
       decks[i] = new Deck(i + 1);
     }
 
+    //creates n number of cards
     for (int i = 0; i < n; i++) {
       players[i] = new Player(i + 1, decks[i], decks[(i + 1) % n]);
     }
@@ -46,6 +48,7 @@ public class CardGame {
     Path deckPath = null;
 
     if (0 < args.length) {
+      //takes and validates the number of players
       try {
         numPlayers = Integer.parseInt(args[0]);
         validNumPlayers = true;
@@ -55,6 +58,7 @@ public class CardGame {
     }
 
     if (1 < args.length) {
+      // takes and validates the deck path
       try {
         deckPath = Path.of(args[1]);
         validPackPath = true;
@@ -134,6 +138,7 @@ public class CardGame {
       throw new InvalidPackException("Error loading pack %s".formatted(packPath), e);
     }
     if (lines.size() != 8 * n) {
+      //checks that the deck given is the correct length
       String errorString = "A decks length must be 8n (%d), but the supplied deck was %s.";
       throw new InvalidPackException(errorString.formatted(8 * n, lines.size()));
     }
@@ -156,9 +161,12 @@ public class CardGame {
 
   private void deal(Card[] cards) {
     for (int i = 0; i < 4 * n; i++) {
+      //deals each card in the first half of the pack to the players in a circular order
       players[i % n].addCard(cards[i], i / n);
     }
     for (int i = (8 * n) - 1; i > (4 * n) - 1; i--) {
+      // deals each card in the second half of the pack to the decks
+      // loops through the cards in reverse order to counteract the use of a linkedBlockingQueue for the decks.
       try {
         decks[i % n].addCard(cards[i]);
       } catch (InterruptedException e) {

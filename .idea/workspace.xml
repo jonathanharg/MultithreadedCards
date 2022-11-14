@@ -6,15 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="80c7ba0b-d75d-4399-8c37-4e571a7215fc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/CardGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CardGameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/DeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/DeckTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/PlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/TestUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TestUtilities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,10 +214,10 @@
     </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MultithreadedCards$All_in_MultithreadedCards.ic" NAME="All in MultithreadedCards Coverage Results" MODIFIED="1668011672588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/MultithreadedCards$Run_Main.ic" NAME="Run Main Coverage Results" MODIFIED="1668032777252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/MultithreadedCards$Test_All.ic" NAME="Test All Coverage Results" MODIFIED="1668036824872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/MultithreadedCards$All_in_MultithreadedCards.ic" NAME="All in MultithreadedCards Coverage Results" MODIFIED="1668011672588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -29,12 +29,13 @@ public class Player implements Runnable {
   public boolean hasWinningHand() {
     Card first = hand[0];
     for (int i = 1; 3 >= i; i++) {
-      if (first.getValue() != hand[i].getValue()) return false;
+      if (!first.equals(hand[i])) return false;
     }
     return true;
   }
 
-  public Card selectDiscardCard() {
+  private Card selectDiscardCard() {
+    // an array of all cards that do not equal the player number.
     Card[] discardCards =
         Arrays.stream(hand).filter(c -> c.getValue() != number).toArray(Card[]::new);
     if (0 < discardCards.length) {
@@ -46,11 +47,15 @@ public class Player implements Runnable {
   }
 
   public void takeTurn() {
+    // All the actions that make up a players turn. Should be treated as atomic, and should not be
+    // interrupted.
     try {
       Card newCard = drawDeck.takeCard();
       log(this + " draws a " + newCard + " from deck" + number);
       Card discardCard = selectDiscardCard();
       if (null == discardCard) {
+        // if for some reason a player does not want to discard any of its cards, dicard the card
+        // just picked up.
         discardCard = newCard;
       } else {
         swapCard(newCard, discardCard);
@@ -65,7 +70,7 @@ public class Player implements Runnable {
 
   public void log(String message, OpenOption... options) {
     // log can be called with CREATE and TRUNCATE_EXISTING options to overwrite old log files from a
-    // previous game.
+    // previous game. Method is overloaded to default to appending an existing log file.
     Path path = Path.of(System.getProperty("user.dir") + "/player" + number + "_output.txt");
     try {
       Files.writeString(path, message + System.lineSeparator(), options);
@@ -89,6 +94,8 @@ public class Player implements Runnable {
   }
 
   public void addCard(Card newCard, int index) {
+    // Adds a card directly to a players hand. Should only be used while dealing otherwise a card
+    // may be overwritten and lost.
     hand[index] = newCard;
   }
 

@@ -26,6 +26,7 @@ public class Card {
 
     Card other = (Card) obj;
 
+    // Two cards are equal if their values are equal
     return value == other.getValue();
   }
 }

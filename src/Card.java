@@ -1,31 +1,31 @@
 public class Card {
-    private final int value; //card number
+  private final int value; // card number
 
-    public Card(int value) {
-        this.value = value;
+  public Card(int value) {
+    this.value = value;
+  }
+
+  public int getValue() {
+    return value;
+  }
+
+  @Override
+  public String toString() {
+    return String.valueOf(value);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (null == obj) {
+      return false;
     }
 
-    public int getValue() {
-        return value;
+    if (obj.getClass() != getClass()) {
+      return false;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
+    Card other = (Card) obj;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-
-        if (obj.getClass() != this.getClass()) {
-            return false;
-        }
-
-        final Card other = (Card) obj;
-
-        return this.value == other.getValue();
-    }
+    return value == other.getValue();
+  }
 }

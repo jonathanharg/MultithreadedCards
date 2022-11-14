@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80c7ba0b-d75d-4399-8c37-4e571a7215fc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/TestUtilities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/CardGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CardGameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/DeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/DeckTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/PlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TestUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TestUtilities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +63,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;coverage&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -73,7 +77,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Test All">
+  <component name="RunManager" selected="Application.Run Main">
     <configuration name="Run Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="CardGame" />
       <module name="MultithreadedCards" />
@@ -196,17 +200,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/TestUtilities.java</url>
-          <line>31</line>
+          <line>38</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/TestUtilities.java</url>
-          <line>32</line>
+          <line>39</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/TestUtilities.java</url>
-          <line>33</line>
+          <line>40</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

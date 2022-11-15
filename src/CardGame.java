@@ -94,17 +94,20 @@ public class CardGame {
     Scanner scanner = new Scanner(System.in);
     boolean givenValidInt = false;
     int numPlayers = 1; // Default value
-    while (!givenValidInt) { // Keep asking for a number until a valid one is provided
+    while (!givenValidInt) {
+      // Keeps asking for a number until a valid one is provided
       System.out.println("Please enter the number of players:");
       try {
         numPlayers = scanner.nextInt();
         if (1 > numPlayers) {
+          //only allows the user to enter a number of players greater than one
           throw new InputMismatchException(
               "The game must have a non-zero number of players, but was %d!".formatted(numPlayers));
         } else {
           givenValidInt = true;
         }
       } catch (java.util.InputMismatchException e) {
+        //only allows the user to enter a positive number of players
         System.out.println("The number of players must be a positive integer! " + e.getMessage());
         scanner.nextLine();
         scanner.reset();
@@ -114,6 +117,7 @@ public class CardGame {
   }
 
   private static String getDeckPath() {
+    //takes in the path of the deck from the user
     Scanner scanner = new Scanner(System.in);
     System.out.println("Please enter the location of the pack to load:");
     return scanner.nextLine();
@@ -130,6 +134,7 @@ public class CardGame {
   }
 
   private Card[] loadPack(Path packPath) throws InvalidPackException {
+    //loads the pack of 8n cards given by the user
     Card[] cards = new Card[8 * n];
     List<String> lines;
     try {
@@ -144,6 +149,7 @@ public class CardGame {
     }
 
     for (int i = 0; i < lines.size(); i++) {
+      //creates each card using the value of each card in the deck chose by the user.
       try {
         int cardValue = Integer.parseInt(lines.get(i));
         if (0 > cardValue) {
@@ -151,6 +157,7 @@ public class CardGame {
         }
         cards[i] = new Card(cardValue);
       } catch (NumberFormatException e) {
+        //each card value cannot be a negative integer
         String errorString =
             "Invalid card value on line %d of %s. Each line must be a non-negative integer.";
         throw new InvalidPackException(errorString.formatted(i, packPath.toString()));
@@ -196,14 +203,17 @@ public class CardGame {
 
   public void runSequentialGame() {
     for (int i = 0; i < n; i++) {
+      //logs each player
       players[i].log(
           players[i] + " initial hand " + players[i].handToString(), CREATE, TRUNCATE_EXISTING);
       if (players[i].hasWinningHand() && null == winner) {
+        //finds which player has the winning hand, unless a player has already won.
         winner = players[i];
         playerHasWon = true;
       }
     }
     while (!playerHasWon) {
+      // each player takes a turn in sequential order until one of them wins
       for (int i = 0; i < n; i++) {
         players[i].takeTurn();
         if (players[i].hasWinningHand()) {
@@ -215,8 +225,10 @@ public class CardGame {
   }
 
   private void determineWinner() {
+    //returns if another player has already won
     if (null != winner) return;
     for (int i = 0; i < n; i++) {
+      //finds the player with the winning hand
       if (players[i].hasWinningHand()) {
         winner = players[i];
         break;
@@ -224,6 +236,7 @@ public class CardGame {
     }
     System.out.println(winner + " has won! 🥳😹");
     for (int i = 0; i < n; i++) {
+      //logs in each player's file who the winner is.
       players[i].finalLog(winner);
       decks[i].createFinalLog();
     }

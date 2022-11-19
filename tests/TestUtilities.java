@@ -35,10 +35,10 @@ public class TestUtilities {
     return privateField.get(obj);
   }
 
-  public static void runPrivateMethod(Object obj, String method, Object... params)
+  public static Object runPrivateMethod(Object obj, String method, Object... params)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     var privateMethod = obj.getClass().getDeclaredMethod(method);
     privateMethod.setAccessible(true);
-    privateMethod.invoke(obj, params);
+    return privateMethod.invoke(obj, params);
   }
 }

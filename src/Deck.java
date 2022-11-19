@@ -4,7 +4,6 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Deck {
@@ -22,19 +21,16 @@ public class Deck {
   }
 
   public String toString() {
-    List<String> cardList = cards.stream().map(c -> String.valueOf(c.getValue())).toList();
-    return "deck " + number + " contents: " + String.join(" ", cardList);
+    return "deck " + number + " contents: " + Card.StreamToString(cards.stream());
   }
 
   public void addCard(Card card) throws InterruptedException {
-    // Put is used as it blocks the current thread if the queue is locked until the queue is
-    // unlocked
+    // Put blocks the current thread if the queue is locked
     cards.put(card);
   }
 
   public Card takeCard() throws InterruptedException {
-    // Take blocks the current thread until the cards queue is unlocked and a card is available to
-    // be taken.
+    // Take blocks the current thread until the queue is unlocked and a card is available.
     return cards.take();
   }
 

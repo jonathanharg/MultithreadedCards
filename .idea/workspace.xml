@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80c7ba0b-d75d-4399-8c37-4e571a7215fc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/resources/3pl_instant_win.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/resources/3pl_invalid.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/resources/3pl_invalid2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/CardGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CardGameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/DeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/DeckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/PlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TestUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TestUtilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/resources/5pl_verifiedOutput.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/resources/5pl.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,16 +60,23 @@
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jonathanharg/Documents/University/Year 2/Software Development/MultithreadedCards/tests/resources&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/resources" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -68,7 +87,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run Main">
+  <component name="RunManager" selected="JUnit.Test All">
     <configuration name="Run Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="CardGame" />
       <module name="MultithreadedCards" />
@@ -76,52 +95,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardGameTest.ThreadedSameAsSequential" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CardGameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MultithreadedCards" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CardGameTest" />
-      <option name="METHOD_NAME" value="ThreadedSameAsSequential" />
+      <option name="METHOD_NAME" value="invalidDeck(java.lang.String)" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CardGameTest.infiniteLimitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MultithreadedCards" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CardGameTest" />
+      <option name="METHOD_NAME" value="infiniteLimitTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardGameTest.deal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MultithreadedCards" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CardGameTest" />
-      <option name="METHOD_NAME" value="deal" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="CardTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardGameTest.invalidPlayerInput (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeckTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MultithreadedCards" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CardGameTest" />
-      <option name="METHOD_NAME" value="invalidPlayerInput(int)" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="DeckTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardGameTest.invalidPlayerInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MultithreadedCards" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CardGameTest" />
-      <option name="METHOD_NAME" value="invalidPlayerInput" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CardGameTest.mainArgsDeckPath" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="MultithreadedCards" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CardGameTest" />
-      <option name="METHOD_NAME" value="mainArgsDeckPath" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="PlayerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -145,19 +161,19 @@
     <list>
       <item itemvalue="Application.Run Main" />
       <item itemvalue="JUnit.Test All" />
-      <item itemvalue="JUnit.CardGameTest.ThreadedSameAsSequential" />
-      <item itemvalue="JUnit.CardGameTest.mainArgsDeckPath" />
-      <item itemvalue="JUnit.CardGameTest.deal" />
-      <item itemvalue="JUnit.CardGameTest.invalidPlayerInput" />
-      <item itemvalue="JUnit.CardGameTest.invalidPlayerInput (1)" />
+      <item itemvalue="JUnit.CardGameTest.infiniteLimitTest" />
+      <item itemvalue="JUnit.CardGameTest" />
+      <item itemvalue="JUnit.CardTest" />
+      <item itemvalue="JUnit.DeckTest" />
+      <item itemvalue="JUnit.PlayerTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CardGameTest.deal" />
-        <item itemvalue="JUnit.CardGameTest.ThreadedSameAsSequential" />
-        <item itemvalue="JUnit.CardGameTest.mainArgsDeckPath" />
-        <item itemvalue="JUnit.CardGameTest.invalidPlayerInput (1)" />
-        <item itemvalue="JUnit.CardGameTest.invalidPlayerInput" />
+        <item itemvalue="JUnit.CardGameTest.infiniteLimitTest" />
+        <item itemvalue="JUnit.PlayerTest" />
+        <item itemvalue="JUnit.DeckTest" />
+        <item itemvalue="JUnit.CardTest" />
+        <item itemvalue="JUnit.CardGameTest" />
       </list>
     </recent_temporary>
   </component>
@@ -169,17 +185,84 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667925138676</updated>
+      <workItem from="1668701771078" duration="871000" />
+      <workItem from="1668770540392" duration="110000" />
+      <workItem from="1668770677260" duration="352000" />
+      <workItem from="1668771037338" duration="6783000" />
+      <workItem from="1668778718315" duration="2779000" />
+      <workItem from="1668889717201" duration="3607000" />
+      <workItem from="1668893348575" duration="589000" />
+      <workItem from="1668894026723" duration="2794000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="7352ce51-1406-4965-b5b9-43e5b19887d0">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/Users/jonathanharg/Documents/University/Year 2/Software Development/MultithreadedCards/tests" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
           </value>
         </entry>
+        <entry key="ea44a775-fdf5-4e9f-9ecb-8eae94ac6318">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="7352ce51-1406-4965-b5b9-43e5b19887d0" value="TOOL_WINDOW" />
+        <entry key="ea44a775-fdf5-4e9f-9ecb-8eae94ac6318" value="TOOL_WINDOW" />
       </map>
     </option>
   </component>
@@ -187,34 +270,24 @@
     <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/TestUtilities.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/TestUtilities.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/TestUtilities.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="CardGame" memberName="playerHasWon" />
         <PinnedItemInfo parentTag="java.lang.reflect.Method" memberName="root" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="game.playerHasWon" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MultithreadedCards$Run_Main.ic" NAME="Run Main Coverage Results" MODIFIED="1668032777252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/MultithreadedCards$Test_All.ic" NAME="Test All Coverage Results" MODIFIED="1668036824872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/MultithreadedCards$Run_Main.ic" NAME="Run Main Coverage Results" MODIFIED="1668032777252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/MultithreadedCards_iml$Test_All.ic" NAME="Test All Coverage Results" MODIFIED="1668779292746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/MultithreadedCards$All_in_MultithreadedCards.ic" NAME="All in MultithreadedCards Coverage Results" MODIFIED="1668011672588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

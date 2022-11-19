@@ -5,16 +5,16 @@ import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class Player implements Runnable {
 
   private final int number;
+
+  // Player always has 4 cards in their hand
   private final Card[] hand = new Card[4];
   private final Deck drawDeck;
   private final Deck discardDeck;
-
   private final Random random = new Random();
 
   public Player(int number, Deck drawDeck, Deck discardDeck) {
@@ -28,6 +28,9 @@ public class Player implements Runnable {
 
   public boolean hasWinningHand() {
     Card first = hand[0];
+    if (null == first)
+      return false; // if we are in the middle of a turn, the first card in our hand may be null
+    // in this case we do not have a winning hand
     for (int i = 1; 3 >= i; i++) {
       if (!first.equals(hand[i])) return false;
     }
@@ -54,7 +57,7 @@ public class Player implements Runnable {
       log(this + " draws a " + newCard + " from deck" + number);
       Card discardCard = selectDiscardCard();
       if (null == discardCard) {
-        // if for some reason a player does not want to discard any of its cards, dicard the card
+        // if for some reason a player does not want to discard any of its cards, discard the card
         // just picked up.
         discardCard = newCard;
       } else {
@@ -111,9 +114,7 @@ public class Player implements Runnable {
   }
 
   public String handToString() {
-    List<String> cards =
-        Arrays.stream(hand).map(c -> (null != c) ? String.valueOf(c.getValue()) : "empty").toList();
-    return String.join(" ", cards);
+    return Card.StreamToString(Arrays.stream(hand));
   }
 
   public String toString() {

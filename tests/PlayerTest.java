@@ -47,16 +47,16 @@ class PlayerTest {
     TestUtilities.clean();
   }
 
+  @AfterEach
+  void afterEach() {
+    TestUtilities.clean();
+  }
+
   @BeforeEach
   void beforeEach() {
     drawDeck = new Deck(1);
     discardDeck = new Deck(2);
     player = new Player(1, drawDeck, discardDeck);
-  }
-
-  @AfterEach
-  void afterEach() {
-    TestUtilities.clean();
   }
 
   @ParameterizedTest
@@ -112,19 +112,22 @@ class PlayerTest {
 
   @ParameterizedTest
   @MethodSource("selectDiscardCardGenerator")
-  void selectDiscardCard(Card[] cards, Integer value) {
+  void selectDiscardCard(Card[] cards, Integer value) throws Exception {
     for (int i = 0; 4 > i; i++) {
       player.addCard(cards[i], i);
     }
-    assertEquals(value, player.selectDiscardCard().getValue());
+    Card discardCard = (Card) TestUtilities.runPrivateMethod(player, "selectDiscardCard");
+    assertEquals(value, discardCard.getValue());
   }
 
   @Test
-  void selectDiscardCardNull() {
+  void selectDiscardCardNull() throws Exception {
     for (int i = 0; 4 > i; i++) {
       player.addCard(new Card(1), i);
     }
-    assertNull(player.selectDiscardCard());
+
+    Card discardCard = (Card) TestUtilities.runPrivateMethod(player, "selectDiscardCard");
+    assertNull(discardCard);
   }
 
   @Test

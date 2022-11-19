@@ -1,12 +1,12 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -17,88 +17,87 @@ class CardGameTest {
   @ValueSource(ints = {Integer.MIN_VALUE, 0, -1, -5})
   void invalidPlayerInput(int playerNumbers) {
     assertThrows(
-        InvalidPlayerNumberException.class,
+        CardGame.InvalidPlayerNumberException.class,
         () -> new CardGame(playerNumbers, Path.of(".nonExistentDeck")));
   }
 
-  @Test
-  void mainArgsPlayerNumber() {
-    String[] args = {
-      String.valueOf(2), System.getProperty("user.dir") + "/tests/resources/2pl_simple.txt"
-    };
+  @ParameterizedTest
+  @ValueSource(
+      strings = {
+        "./tests/resources/3pl_invalid.txt",
+        "./tests/resources/3pl_invalid2.txt",
+        "./madeUpDeck",
+        "5pl.txt"
+      })
+  void invalidDeck(String deck) {
+    assertThrows(CardGame.InvalidPackException.class, () -> new CardGame(3, Path.of(deck)));
   }
 
   @Test
-  void mainArgsDeckPath() {
-    String[] args = {
-      String.valueOf(5), System.getProperty("user.dir") + "/tests/resources/5pl_verifiedOutput.txt"
-    };
-  }
-
-  @Test
-  void deal() {
+  void deal() throws Exception {
     CardGame game;
-    try {
-      game =
-          new CardGame(
-              3,
-              Path.of(System.getProperty("user.dir") + "/tests/resources/3pl_unique_infinite.txt"));
-      Player[] players = (Player[]) TestUtilities.getPrivateField(game, "players");
-      Deck[] decks = (Deck[]) TestUtilities.getPrivateField(game, "decks");
+    game =
+        new CardGame(
+            3,
+            Path.of(System.getProperty("user.dir") + "/tests/resources/3pl_unique_infinite.txt"));
+    Player[] players = (Player[]) TestUtilities.getPrivateField(game, "players");
+    Deck[] decks = (Deck[]) TestUtilities.getPrivateField(game, "decks");
 
-      assertEquals("1 4 7 10", players[0].handToString());
-      assertEquals("2 5 8 11", players[1].handToString());
-      assertEquals("3 6 9 12", players[2].handToString());
+    assertEquals("1 4 7 10", players[0].handToString());
+    assertEquals("2 5 8 11", players[1].handToString());
+    assertEquals("3 6 9 12", players[2].handToString());
 
-      assertEquals("deck 1 contents: 22 19 16 13", decks[0].toString());
-      assertEquals("deck 2 contents: 23 20 17 14", decks[1].toString());
-      assertEquals("deck 3 contents: 24 21 18 15", decks[2].toString());
+    assertEquals("deck 1 contents: 22 19 16 13", decks[0].toString());
+    assertEquals("deck 2 contents: 23 20 17 14", decks[1].toString());
+    assertEquals("deck 3 contents: 24 21 18 15", decks[2].toString());
+  }
 
-    } catch (InvalidPackException
-        | InvalidPlayerNumberException
-        | NoSuchFieldException
-        | IllegalAccessException e) {
-      throw new RuntimeException(e);
+  @ParameterizedTest
+  @ValueSource(strings = {"2pl_simple.txt", "3pl_instant_win.txt", "5pl.txt"})
+  void Test2PlayerSimple(String deck) throws Exception {
+    File local = new File(System.getProperty("user.dir"));
+    CardGame game = new CardGame(deck.charAt(0) - '0', Path.of(local + "/tests/resources/" + deck));
+    game.runThreadedGame();
+  }
+
+  @Test
+  void infiniteLimitTest() throws Exception {
+    Random random = new Random();
+    int max = 5;
+    for (int i = 0; max > i; i++) {
+      int n = random.nextInt(2, 101);
+      System.out.println("Testing " + i + "/" + max + " for " + n + " players");
+      generateValidDeck(n);
+      CardGame game = new CardGame(n, Path.of("./generated/deck" + n + "_generated.txt"));
+      game.runThreadedGame();
+      while (!game.hasPlayerWon()) {
+        Thread.sleep(500);
+      }
+
+      Thread.sleep(2000);
+      assertNotNull(TestUtilities.getPrivateField(game, "winner"));
+
+      new File("./generated/deck" + n + "_generated.txt").delete();
     }
   }
 
-  // @Test
-  void ThreadedSameAsSequential() {
-    int playerNumber = 4;
-    Path deck = Path.of(System.getProperty("user.dir") + "/deck4.txt");
-    try {
-      CardGame sequential = new CardGame(playerNumber, deck);
-      CardGame threaded = new CardGame(playerNumber, deck);
-
-      TestUtilities.runPrivateMethod(sequential, "runSequentialGame");
-
-      File directory = new File(System.getProperty("user.dir"));
-      for (File f : directory.listFiles()) {
-        if (f.getName().endsWith("_output.txt")) {
-          String newName = f.getName().replace("output.txt", "seq_output.txt");
-          f.renameTo(new File(directory + "/" + newName));
-        }
-      }
-
-      TestUtilities.runPrivateMethod(threaded, "runThreadedGame");
-
-      for (File f : directory.listFiles()) {
-        if (f.getName().endsWith("seq_output.txt")) {
-          String sequentialName = f.getName();
-          String sequentialFile = Files.readString(Paths.get(directory + "/" + sequentialName));
-          String threadedName = f.getName().replace("seq_output.txt", "output.txt");
-          String threadedFile = Files.readString(Paths.get(directory + "/" + threadedName));
-          assertEquals(sequentialFile, threadedFile);
-        }
-      }
-
-    } catch (InvalidPackException
-        | InvalidPlayerNumberException
-        | InvocationTargetException
-        | NoSuchMethodException
-        | IllegalAccessException
-        | IOException e) {
-      throw new RuntimeException(e);
+  void generateValidDeck(int n) throws IOException {
+    Random random = new Random();
+    ArrayList<Integer> cards = new ArrayList<>();
+    for (int i = 1; i <= n; i++) {
+      cards.add(i);
+      cards.add(i);
+      cards.add(i);
+      cards.add(i);
     }
+    for (int i = 1; i <= 4 * n; i++) {
+      cards.add(random.nextInt(2, 101));
+    }
+    Collections.shuffle(cards);
+    FileWriter writer = new FileWriter("./generated/deck" + n + "_generated.txt");
+    for (Integer i : cards) {
+      writer.write(i + System.lineSeparator());
+    }
+    writer.close();
   }
 }

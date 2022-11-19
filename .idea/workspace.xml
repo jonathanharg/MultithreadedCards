@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80c7ba0b-d75d-4399-8c37-4e571a7215fc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/resources/3pl_instant_win.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/resources/3pl_invalid.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/resources/3pl_invalid2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/CardGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CardGameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/DeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/DeckTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/PlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/TestUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TestUtilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/resources/5pl_verifiedOutput.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/resources/5pl.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +181,7 @@
       <workItem from="1668778718315" duration="2779000" />
       <workItem from="1668889717201" duration="3607000" />
       <workItem from="1668893348575" duration="589000" />
-      <workItem from="1668894026723" duration="2794000" />
+      <workItem from="1668894026723" duration="3006000" />
     </task>
     <servers />
   </component>

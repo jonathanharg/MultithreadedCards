@@ -58,10 +58,11 @@ class CardGameTest {
     File local = new File(System.getProperty("user.dir"));
     CardGame game = new CardGame(deck.charAt(0) - '0', Path.of(local + "/tests/resources/" + deck));
     game.runThreadedGame();
+    Thread.sleep(500); // wait for game to finish
   }
 
   @Test
-  void infiniteLimitTest() throws Exception {
+  void limitTest() throws Exception {
     Random random = new Random();
     int max = 5;
     for (int i = 0; max > i; i++) {

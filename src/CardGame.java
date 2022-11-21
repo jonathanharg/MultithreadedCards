@@ -163,6 +163,8 @@ public class CardGame {
     }
 
     // Runs each player
+    // creation and running are seperated into two different loops so player 1 doesn't get a large advantage by running
+    // before all the other players threads are even created.
     for (int i = 0; i < n; i++) {
       threads[i].start();
     }

@@ -1,10 +1,15 @@
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestUtilities {
   public static void clean() {
@@ -14,6 +19,21 @@ public class TestUtilities {
         f.delete();
       }
     }
+  }
+
+  public static boolean fileEqualsString(String actual, String textFile) throws IOException {
+    File directory = new File(System.getProperty("user.dir"));
+    String file = Files.readString(Paths.get(directory + "/" + textFile));
+
+    return actual.equals(file);
+  }
+
+  public static boolean filesEqual(String textFile1, String textFile2) throws IOException {
+    File directory = new File(System.getProperty("user.dir"));
+    String file1 = Files.readString(Paths.get(directory + "/" + textFile1));
+    String file2 = Files.readString(Paths.get(directory + "/" + textFile2));
+
+    return file1.equals(file2);
   }
 
   public static <T> Stream<Arguments> decksGenerator(int[][] decks, List<T> result) {

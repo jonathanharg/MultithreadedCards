@@ -54,7 +54,7 @@ public class Player implements Runnable {
     // interrupted.
     try {
       Card newCard = drawDeck.takeCard();
-      log(this + " draws a " + newCard + " from deck" + number);
+      log(this + " draws a " + newCard + " from " + drawDeck);
       Card discardCard = selectDiscardCard();
       if (null == discardCard) {
         // if for some reason a player does not want to discard any of its cards, discard the card
@@ -64,7 +64,7 @@ public class Player implements Runnable {
         swapCard(newCard, discardCard);
       }
       discardDeck.addCard(discardCard);
-      log(this + " discards a " + discardCard + " to deck" + (number + 1));
+      log(this + " discards a " + discardCard + " to " + discardDeck);
       log(this + " current hand is " + handToString());
     } catch (InterruptedException e) {
       throw new RuntimeException(e);

@@ -1,6 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.AfterEach;
@@ -33,8 +35,9 @@ class DeckTest {
   }
 
   @Test
-  void testAddCard() {
-    assertEquals("deck 1 contents: 1 7 2 9", deck.toString());
+  void testAddCard() throws IOException {
+    deck.createFinalLog();
+    assertTrue(TestUtilities.fileEqualsString("deck 1 contents: 1 7 2 9", "deck1_output.txt"));
   }
 
   @Test
@@ -44,15 +47,14 @@ class DeckTest {
     assertEquals(7, deck.takeCard().getValue());
     assertEquals(2, deck.takeCard().getValue());
     assertEquals(9, deck.takeCard().getValue());
-    assertEquals("deck 1 contents: ", deck.toString());
+
+    deck.createFinalLog();
+    assertTrue(TestUtilities.fileEqualsString("deck 1 contents: ", "deck1_output.txt"));
   }
 
   @Test
   void testCreateFinalLog() throws Exception {
     deck.createFinalLog();
-    File directory = new File(System.getProperty("user.dir"));
-
-    String log = Files.readString(Paths.get(directory + "/deck1_output.txt"));
-    assertEquals("deck 1 contents: 1 7 2 9", log);
+    assertTrue(TestUtilities.fileEqualsString("deck 1 contents: 1 7 2 9", "deck1_output.txt"));
   }
 }

@@ -21,7 +21,7 @@ public class Deck {
   }
 
   public String toString() {
-    return "deck " + number + " contents: " + Card.StreamToString(cards.stream());
+    return "deck " + number;
   }
 
   public void addCard(Card card) throws InterruptedException {
@@ -36,9 +36,10 @@ public class Deck {
 
   public void createFinalLog() {
     Path path = Path.of(System.getProperty("user.dir") + "/deck" + number + "_output.txt");
+    String deckInfo = this + " contents: " + Card.StreamToString(cards.stream());
     try {
       Files.writeString(
-          path, toString(), CREATE, TRUNCATE_EXISTING); // Will any overwrite existing files
+          path, deckInfo, CREATE, TRUNCATE_EXISTING); // Will any overwrite existing files
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

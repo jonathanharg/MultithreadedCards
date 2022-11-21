@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="80c7ba0b-d75d-4399-8c37-4e571a7215fc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CardGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/CardGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CardGameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/DeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/DeckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TestUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TestUtilities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,12 +89,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardGameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CardGameTest.deal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MultithreadedCards" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CardGameTest" />
-      <option name="METHOD_NAME" value="invalidDeck(java.lang.String)" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="deal" />
+      <option name="TEST_OBJECT" value="method" />
+      <dir value="$PROJECT_DIR$/tests" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -104,11 +116,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CardGameTest.limitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MultithreadedCards" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CardTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="CardGameTest" />
+      <option name="METHOD_NAME" value="limitTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -150,19 +163,19 @@
     <list>
       <item itemvalue="Application.Run Main" />
       <item itemvalue="JUnit.Test All" />
+      <item itemvalue="JUnit.CardGameTest.deal" />
+      <item itemvalue="JUnit.CardGameTest.limitTest" />
       <item itemvalue="JUnit.CardGameTest.infiniteLimitTest" />
-      <item itemvalue="JUnit.CardGameTest" />
-      <item itemvalue="JUnit.CardTest" />
       <item itemvalue="JUnit.DeckTest" />
       <item itemvalue="JUnit.PlayerTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CardGameTest.deal" />
+        <item itemvalue="JUnit.CardGameTest.limitTest" />
         <item itemvalue="JUnit.CardGameTest.infiniteLimitTest" />
         <item itemvalue="JUnit.PlayerTest" />
         <item itemvalue="JUnit.DeckTest" />
-        <item itemvalue="JUnit.CardTest" />
-        <item itemvalue="JUnit.CardGameTest" />
       </list>
     </recent_temporary>
   </component>
@@ -182,6 +195,8 @@
       <workItem from="1668889717201" duration="3607000" />
       <workItem from="1668893348575" duration="589000" />
       <workItem from="1668894026723" duration="3006000" />
+      <workItem from="1668897445701" duration="1234000" />
+      <workItem from="1669029008861" duration="3649000" />
     </task>
     <servers />
   </component>
@@ -275,6 +290,7 @@
     <SUITE FILE_PATH="coverage/MultithreadedCards$Test_All.ic" NAME="Test All Coverage Results" MODIFIED="1668036824872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/MultithreadedCards_iml$CardGameTest_limitTest.ic" NAME="CardGameTest.limitTest Coverage Results" MODIFIED="1668898772776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/MultithreadedCards$Run_Main.ic" NAME="Run Main Coverage Results" MODIFIED="1668032777252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/MultithreadedCards_iml$Test_All.ic" NAME="Test All Coverage Results" MODIFIED="1668779292746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>*</FILTER>

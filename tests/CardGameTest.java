@@ -47,9 +47,13 @@ class CardGameTest {
     assertEquals("2 5 8 11", players[1].handToString());
     assertEquals("3 6 9 12", players[2].handToString());
 
-    assertEquals("deck 1 contents: 22 19 16 13", decks[0].toString());
-    assertEquals("deck 2 contents: 23 20 17 14", decks[1].toString());
-    assertEquals("deck 3 contents: 24 21 18 15", decks[2].toString());
+    for (int i = 0; i < 3; i++) {
+      decks[i].createFinalLog();
+    }
+
+    assertTrue(TestUtilities.fileEqualsString("deck 1 contents: 22 19 16 13", "deck1_output.txt"));
+    assertTrue(TestUtilities.fileEqualsString("deck 2 contents: 23 20 17 14", "deck2_output.txt"));
+    assertTrue(TestUtilities.fileEqualsString("deck 3 contents: 24 21 18 15", "deck3_output.txt"));
   }
 
   @ParameterizedTest

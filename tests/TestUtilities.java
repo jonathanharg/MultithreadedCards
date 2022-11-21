@@ -9,8 +9,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class TestUtilities {
   public static void clean() {
     File directory = new File(System.getProperty("user.dir"));

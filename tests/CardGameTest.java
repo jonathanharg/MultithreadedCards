@@ -73,7 +73,7 @@ class CardGameTest {
       int n = random.nextInt(2, 101);
       System.out.println("Testing " + i + "/" + max + " for " + n + " players");
       generateValidDeck(n);
-      CardGame game = new CardGame(n, Path.of("./generated/deck" + n + "_generated.txt"));
+      CardGame game = new CardGame(n, Path.of("./deck" + n + "_generated.txt"));
       game.runThreadedGame();
       while (!game.hasPlayerWon()) {
         Thread.sleep(500);
@@ -82,7 +82,7 @@ class CardGameTest {
       Thread.sleep(2000);
       assertNotNull(TestUtilities.getPrivateField(game, "winner"));
 
-      new File("./generated/deck" + n + "_generated.txt").delete();
+      new File("./deck" + n + "_generated.txt").delete();
     }
   }
 
@@ -99,7 +99,7 @@ class CardGameTest {
       cards.add(random.nextInt(2, 101));
     }
     Collections.shuffle(cards);
-    FileWriter writer = new FileWriter("./generated/deck" + n + "_generated.txt");
+    FileWriter writer = new FileWriter("./deck" + n + "_generated.txt");
     for (Integer i : cards) {
       writer.write(i + System.lineSeparator());
     }

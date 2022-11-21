@@ -126,7 +126,7 @@ public class Player implements Runnable {
     while (!CardGame.currentGame.hasPlayerWon()) {
       takeTurn();
       if (hasWinningHand()) {
-        CardGame.currentGame.notifyPlayerFinished();
+        CardGame.currentGame.notifyPlayerWin(this);
       }
     }
   }

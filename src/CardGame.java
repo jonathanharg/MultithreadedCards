@@ -14,7 +14,7 @@ public class CardGame {
   private final Deck[] decks;
   private final Player[] players;
 
-  private Player winner = null;
+  private volatile Player winner = null;
   private volatile boolean playerHasWon = false;
 
   public CardGame(int n, Path packPath) throws InvalidPackException, InvalidPlayerNumberException {
@@ -94,10 +94,13 @@ public class CardGame {
     return playerHasWon;
   }
 
-  public void notifyPlayerFinished() {
+  public void notifyPlayerWin(Player player) {
     // Called when a player has a winning hand, it is then verified if they have won or not
-    playerHasWon = true;
-    determineWinner();
+    if (!playerHasWon){
+      playerHasWon = true;
+      winner = player;
+      System.out.println(winner + " has won! 🥳😹");
+    }
   }
 
   private Card[] loadPack(Path packPath) throws InvalidPackException {
@@ -116,7 +119,6 @@ public class CardGame {
     }
 
     for (int i = 0; i < lines.size(); i++) {
-      // creates each card using the value of each card in the deck chose by the user.
       try {
         int cardValue = Integer.parseInt(lines.get(i));
         if (0 > cardValue) {
@@ -124,7 +126,7 @@ public class CardGame {
         }
         cards[i] = new Card(cardValue);
       } catch (NumberFormatException e) {
-        // each card value cannot be a negative integer
+        // each card value must be a positive integer, e.g. not a string or -2
         String errorString =
             "Invalid card value on line %d of %s. Each line must be a non-negative integer.";
         throw new InvalidPackException(errorString.formatted(i, packPath.toString()));
@@ -138,9 +140,9 @@ public class CardGame {
       // deals each card in the first half of the pack to the players in a circular order
       players[i % n].addCard(cards[i], i / n);
     }
-    int lastIndex = (8 * n) - 1;
-    int middleIndex = (4 * n) - 1;
-    for (int i = lastIndex; i > middleIndex; i--) {
+    int lastCardInPack = (8 * n) - 1;
+    int middleCardInPack = (4 * n) - 1;
+    for (int i = lastCardInPack; i > middleCardInPack; i--) {
       // deals each card in the second half of the pack to the decks
       // loops through the cards in reverse order to counteract the FIFO nature of the queue used
       // for the decks.
@@ -163,7 +165,8 @@ public class CardGame {
     }
 
     // Runs each player
-    // creation and running are seperated into two different loops so player 1 doesn't get a large advantage by running
+    // creation and running are seperated into two different loops so player 1 doesn't get a large
+    // advantage by running
     // before all the other players threads are even created.
     for (int i = 0; i < n; i++) {
       threads[i].start();
@@ -171,15 +174,13 @@ public class CardGame {
   }
 
   private void checkForInstantWin() {
-    boolean instantWin = false;
     for (int i = 0; i < n; i++) {
       // logs initial hands of each player
       players[i].log(
           players[i] + " initial hand " + players[i].handToString(), CREATE, TRUNCATE_EXISTING);
       // Checks if a player has already been dealt a winning hand.
-      if (players[i].hasWinningHand()) instantWin = true;
+      if (players[i].hasWinningHand()) notifyPlayerWin(players[i]);
     }
-    if (instantWin) notifyPlayerFinished();
   }
 
   public void runSequentialGame() {
@@ -189,27 +190,9 @@ public class CardGame {
       for (int i = 0; i < n; i++) {
         players[i].takeTurn();
         if (players[i].hasWinningHand()) {
-          notifyPlayerFinished();
+          notifyPlayerWin(players[i]);
         }
       }
-    }
-  }
-
-  private void determineWinner() {
-    // returns if another player has already claimed they have won
-    if (null != winner) return;
-    for (int i = 0; i < n; i++) {
-      // finds the first player with a winning hand
-      if (players[i].hasWinningHand()) {
-        winner = players[i];
-        break;
-      }
-    }
-    System.out.println(winner + " has won! 🥳😹");
-    for (int i = 0; i < n; i++) {
-      // Notifies each player who the winner is.
-      players[i].finalLog(winner);
-      decks[i].createFinalLog();
     }
   }
 

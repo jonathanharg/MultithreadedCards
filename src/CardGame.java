@@ -96,7 +96,7 @@ public class CardGame {
 
   public void notifyPlayerWin(Player player) {
     // Called when a player has a winning hand, it is then verified if they have won or not
-    if (!playerHasWon){
+    if (!playerHasWon) {
       playerHasWon = true;
       winner = player;
       System.out.println(winner + " has won! 🥳😹");

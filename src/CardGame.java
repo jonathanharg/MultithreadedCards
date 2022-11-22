@@ -14,7 +14,6 @@ public class CardGame {
   private final Deck[] decks;
   private final Player[] players;
 
-  private volatile Player winner = null;
   private volatile boolean playerHasWon = false;
 
   public CardGame(int n, Path packPath) throws InvalidPackException, InvalidPlayerNumberException {
@@ -90,16 +89,18 @@ public class CardGame {
     return path;
   }
 
-  public boolean hasPlayerWon() {
-    return playerHasWon;
+  public boolean isRunning() {
+    return !playerHasWon;
   }
 
-  public void notifyPlayerWin(Player player) {
+  public void claimVictoryFor(Player player) {
     // Called when a player has a winning hand, it is then verified if they have won or not
     if (!playerHasWon) {
       playerHasWon = true;
-      winner = player;
-      System.out.println(winner + " has won! 🥳😹");
+      System.out.println(player + " has won! 🥳😹");
+      for (int i = 0; i < n; i++) {
+        players[i].finalLog(player);
+      }
     }
   }
 
@@ -179,7 +180,7 @@ public class CardGame {
       players[i].log(
           players[i] + " initial hand " + players[i].handToString(), CREATE, TRUNCATE_EXISTING);
       // Checks if a player has already been dealt a winning hand.
-      if (players[i].hasWinningHand()) notifyPlayerWin(players[i]);
+      if (players[i].hasWinningHand()) claimVictoryFor(players[i]);
     }
   }
 
@@ -190,7 +191,7 @@ public class CardGame {
       for (int i = 0; i < n; i++) {
         players[i].takeTurn();
         if (players[i].hasWinningHand()) {
-          notifyPlayerWin(players[i]);
+          claimVictoryFor(players[i]);
         }
       }
     }

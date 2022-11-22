@@ -123,10 +123,10 @@ public class Player implements Runnable {
 
   @Override
   public void run() {
-    while (!CardGame.currentGame.hasPlayerWon()) {
+    while (CardGame.currentGame.isRunning()) {
       takeTurn();
       if (hasWinningHand()) {
-        CardGame.currentGame.notifyPlayerWin(this);
+        CardGame.currentGame.claimVictoryFor(this);
       }
     }
   }

@@ -47,7 +47,7 @@ class CardGameTest {
     assertEquals("2 5 8 11", players[1].handToString());
     assertEquals("3 6 9 12", players[2].handToString());
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; 3 > i; i++) {
       decks[i].createFinalLog();
     }
 
@@ -75,7 +75,7 @@ class CardGameTest {
       generateValidDeck(n);
       CardGame game = new CardGame(n, Path.of("./deck" + n + "_generated.txt"));
       game.runThreadedGame();
-      while (!game.hasPlayerWon()) {
+      while (game.isRunning()) {
         Thread.sleep(500);
       }
 

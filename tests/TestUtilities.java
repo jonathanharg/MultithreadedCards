@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,7 +13,7 @@ import org.junit.jupiter.params.provider.Arguments;
 public class TestUtilities {
   public static void clean() {
     File directory = new File(System.getProperty("user.dir"));
-    for (File f : directory.listFiles()) {
+    for (File f : Objects.requireNonNull(directory.listFiles())) {
       if (f.getName().endsWith("_output.txt")) {
         f.delete();
       }

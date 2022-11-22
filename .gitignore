@@ -27,5 +27,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+*.jar
+*.class
 deck*.txt
 *_output.txt

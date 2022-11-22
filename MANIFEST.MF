@@ -1,0 +1,2 @@
+Name: Multithreaded Cards
+Main-Class: CardGame

@@ -100,6 +100,9 @@ public class CardGame {
       System.out.println(player + " has won! 🥳😹");
       for (int i = 0; i < n; i++) {
         players[i].finalLog(player);
+        decks[i]
+            .createFinalLog(); // TODO: MAY BE BUGGED! WAIT FOR THE END OF EACH PLAYERS TURN BEFORE
+                               // PRINTING DECKS
       }
     }
   }
@@ -179,6 +182,9 @@ public class CardGame {
       // logs initial hands of each player
       players[i].log(
           players[i] + " initial hand " + players[i].handToString(), CREATE, TRUNCATE_EXISTING);
+    }
+
+    for (int i = 0; i < n; i++) {
       // Checks if a player has already been dealt a winning hand.
       if (players[i].hasWinningHand()) claimVictoryFor(players[i]);
     }

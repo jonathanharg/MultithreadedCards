@@ -44,6 +44,10 @@ javac -cp junit-platform-console-standalone-1.9.1.jar ./src/*.java ./tests/*.jav
 
 To run the unit tests
 
+**Warning!** Running unit tests will delete any files ending in `_output.txt` from
+your current directory. This is to clean up artifacts from testing, but may
+result in data loss if you're not careful!
+
 ```shell
 java -jar junit-platform-console-standalone-1.9.1.jar --scan-class-path -cp tests -cp src
 ```

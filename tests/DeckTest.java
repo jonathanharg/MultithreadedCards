@@ -12,14 +12,15 @@ class DeckTest {
   static Deck deck;
 
   @BeforeAll
-  static void beforeAll() {
+  static void beforeAllTest() {
     TestUtilities.clean();
   }
 
   @BeforeEach
-  void beforeEach() throws Exception {
+  void beforeEachTest() throws Exception {
+    // tests that put() used in the add card function blocks the current
+    // thread if the queue is locked.
     deck = new Deck(1);
-
     deck.addCard(new Card(1));
     deck.addCard(new Card(7));
     deck.addCard(new Card(2));
@@ -27,30 +28,30 @@ class DeckTest {
   }
 
   @AfterEach
-  void afterEach() {
+  void afterEachTest() {
     TestUtilities.clean();
   }
 
   @Test
-  void testAddCard() throws IOException {
+  void addCardTest() throws IOException {
     deck.createFinalLog();
     assertTrue(TestUtilities.fileEqualsString("deck 1 contents: 1 7 2 9", "deck1_output.txt"));
   }
 
   @Test
-  void takeCard() throws Exception {
-
+  void takeCardTest() throws Exception {
+    // tests that the takeCard() removes the desired card.
     assertEquals(1, deck.takeCard().getValue());
     assertEquals(7, deck.takeCard().getValue());
     assertEquals(2, deck.takeCard().getValue());
     assertEquals(9, deck.takeCard().getValue());
-
+    //by this point the deck should be empty.
     deck.createFinalLog();
     assertTrue(TestUtilities.fileEqualsString("deck 1 contents: ", "deck1_output.txt"));
   }
 
   @Test
-  void testCreateFinalLog() throws Exception {
+  void finalLogTest() throws Exception {
     deck.createFinalLog();
     assertTrue(TestUtilities.fileEqualsString("deck 1 contents: 1 7 2 9", "deck1_output.txt"));
   }

@@ -19,6 +19,7 @@ class PlayerTest {
   static Player player;
 
   private static Stream<Arguments> hasWonGenerator() {
+    // generates decks, including ones that have won.
     int[][] decks =
         new int[][] {
           {1, 2, 3, 4}, {2, 2, 2, 2}, {1, 1, 1, 1}, {1, 1, 1, 3},
@@ -28,6 +29,7 @@ class PlayerTest {
   }
 
   private static Stream<Arguments> selectDiscardCardGenerator() {
+    // generates discard cards.
     int[][] decks =
         new int[][] {
           {2, 2, 2, 2},
@@ -44,6 +46,7 @@ class PlayerTest {
 
   @BeforeAll
   static void beforeAll() {
+    // ensures everything is cleaned before all tests.
     TestUtilities.clean();
   }
 
@@ -61,7 +64,8 @@ class PlayerTest {
 
   @ParameterizedTest
   @MethodSource("hasWonGenerator")
-  void hasWon(Card[] cards, boolean value) {
+  void hasWonTest(Card[] cards, boolean value) {
+    // tests that the hasWinningHand boolean is true when a player has won.
     for (int i = 0; 4 > i; i++) {
       player.addCard(cards[i], i);
     }
@@ -69,29 +73,30 @@ class PlayerTest {
   }
 
   @Test
-  void createLog() {
+  void createLogTest() {
     player.log("Testing Log!", CREATE, TRUNCATE_EXISTING);
     assertTrue(new File("./player1_output.txt").isFile());
     assertTrue(0 < new File("./player1_output.txt").length());
   }
 
   @Test
-  void appendLog() {
-    createLog();
+  void appendLogTest() {
+    createLogTest();
     var length = new File("./player1_output.txt").length();
     player.log("Add another line!");
     assertTrue(length < new File("./player1_output.txt").length());
   }
 
   @Test
-  void addCard() {
+  void addCardTest() {
     Card card = new Card(93751934);
     player.addCard(card, 0);
     assertTrue(player.handToString().contains(String.valueOf(card.getValue())));
   }
 
   @Test
-  void swapCardByObj() {
+  void swapCardByObjTest() {
+    //tests that cards can be swapped when given their object
     Card a = new Card(1738);
     Card b = new Card(21);
     player.addCard(a, 0);
@@ -101,7 +106,8 @@ class PlayerTest {
   }
 
   @Test
-  void swapCardByIndex() {
+  void swapCardByIndexTest() {
+    // tests that cards can be swapped when given their index
     Card a = new Card(1738);
     Card b = new Card(21);
     player.addCard(a, 0);
@@ -113,6 +119,7 @@ class PlayerTest {
   @ParameterizedTest
   @MethodSource("selectDiscardCardGenerator")
   void selectDiscardCard(Card[] cards, Integer value) throws Exception {
+    //tests that cards can be discarded successfully
     for (int i = 0; 4 > i; i++) {
       player.addCard(cards[i], i);
     }

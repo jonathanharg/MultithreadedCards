@@ -44,7 +44,6 @@ public class CardGame {
     int numPlayers = getNumberOfPlayers();
     CardGame cardGame;
     boolean validDeck = false;
-
     while (!validDeck) {
       try {
         Path deckPath = getDeckPath();
@@ -168,10 +167,17 @@ public class CardGame {
       threads[i] = new Thread(players[i]);
     }
 
+<<<<<<< HEAD
+    // Runs each player.
+    // The creation and running are separated into two different loops so player 1 doesn't
+    // get a significant advantage by running before all the other players threads are even
+    // created.
+=======
     // Runs each player
     // creation and running are seperated into two different loops so player 1 doesn't get a large
     // advantage by running
     // before all the other players threads are even created.
+>>>>>>> 1838c2889c5d9617407f138364350f74013d3609
     for (int i = 0; i < n; i++) {
       threads[i].start();
     }

@@ -137,7 +137,7 @@ public class CardGame {
           // each card value must be a positive integer, e.g. not a string or -2
           String errorString =
               "Invalid card value on line %d of %s. Each line must be a non-negative integer.";
-          throw new InvalidPackException(errorString.formatted(lineIndex, packPath.toString()));
+          throw new InvalidPackException(errorString.formatted(lineIndex + 1, packPath.toString()));
         }
       }
       lineIndex++;

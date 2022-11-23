@@ -5,7 +5,21 @@ consisting of all the same cards.
 
 This code is written in Java 19, tested using JUnit 5 and complies with Google Java Style.
 
+## TLDR
+Change to the correct directory with `cd cardsTest` or `cd MultithreadedCards`.
+
+Run the game with
+```shell
+java -jar cards.jar
+```
+Run the tests with
+```shell
+java -jar junit-platform-console-standalone-1.9.1.jar --scan-class-path -cp tests -cp src
+```
+
 ## Main Game
+
+Before running any commands make sure you are in the root directory of this project.
 
 ### Compiling
 

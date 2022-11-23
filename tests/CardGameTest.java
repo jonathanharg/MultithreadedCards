@@ -72,9 +72,18 @@ class CardGameTest {
       strings = {"1pl_whitespace_deck.txt", "2pl_simple.txt", "3pl_instant_win.txt", "5pl.txt"})
   void preMadeDeckTest(String deck) throws Exception {
     // testing whether the game runs with pre-made deck paths
+    int firstChar = deck.charAt(0) - '0';
     File local = new File(System.getProperty("user.dir"));
-    CardGame game = new CardGame(deck.charAt(0) - '0', Path.of(local + "/tests/resources/" + deck));
+    CardGame game = new CardGame(firstChar, Path.of(local + "/tests/resources/" + deck));
     game.runThreadedGame();
+  }
+
+  @Test
+  void loadPackTest() {
+    File local = new File(System.getProperty("user.dir"));
+    assertThrows(CardGame.InvalidPackException.class, () -> {
+      CardGame game = new CardGame(5, Path.of(local + "/tests/resources/2pl_simple.txt"));
+    });
   }
 
   @Test

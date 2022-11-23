@@ -117,7 +117,7 @@ public class CardGame {
     int cardIndex = 0;
     int lineIndex = 0;
     while (cardIndex < 8 * n) {
-      if (lineIndex > lines.size()) {
+      if (lineIndex >= lines.size()) {
         // We have reached the end of the file, but we don't have enough cards since
         // our cardIndex < 8n
         String errorString = "A decks must have 8n (%d) cards, but the supplied deck only had %d.";

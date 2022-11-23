@@ -67,7 +67,7 @@ class PlayerTest {
 
   @ParameterizedTest
   @MethodSource("hasWonGenerator")
-  void hasWonTest(Card[] cards, boolean value) {
+  void hasWinningHandTest(Card[] cards, boolean value) {
     // tests that the game recognises when a player has won.
     // uses the hasWonGenerator
     for (int i = 0; 4 > i; i++) {
@@ -77,7 +77,17 @@ class PlayerTest {
   }
 
   @Test
-  void createLogTest() {
+  void hasWinningHandTestNull(){
+    // test that the game can handle a winning hand test if a card is null
+    player.addCard(null, 0);
+    for (int i = 1; 4 > i; i++) {
+      player.addCard(new Card(i), i);
+    }
+    assertFalse(player.hasWinningHand());
+  }
+
+  @Test
+  void logTest() {
     // tests that logs are successfully created
     player.log("Testing Log!", CREATE, TRUNCATE_EXISTING);
     assertTrue(new File("./player1_output.txt").isFile());
@@ -87,7 +97,7 @@ class PlayerTest {
   @Test
   void appendLogTest() {
     // tests that a player can add another line to its log successfully
-    createLogTest();
+    logTest();
     var length = new File("./player1_output.txt").length();
     player.log("Add another line!");
     assertTrue(length < new File("./player1_output.txt").length());

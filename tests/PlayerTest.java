@@ -20,6 +20,7 @@ class PlayerTest {
 
   private static Stream<Arguments> hasWonGenerator() {
     // generates decks, including ones that have won.
+    // it then stores the results of whether the decks have won or not.
     int[][] decks =
         new int[][] {
           {1, 2, 3, 4}, {2, 2, 2, 2}, {1, 1, 1, 1}, {1, 1, 1, 3},
@@ -29,7 +30,8 @@ class PlayerTest {
   }
 
   private static Stream<Arguments> selectDiscardCardGenerator() {
-    // generates discard cards.
+    // generates a some random decks
+    // allocates a card from each deck to be discarded - this is used in other tests
     int[][] decks =
         new int[][] {
           {2, 2, 2, 2},
@@ -67,6 +69,7 @@ class PlayerTest {
   @MethodSource("hasWonGenerator")
   void hasWonTest(Card[] cards, boolean value) {
     // tests that the game recognises when a player has won.
+    // uses the hasWonGenerator
     for (int i = 0; 4 > i; i++) {
       player.addCard(cards[i], i);
     }

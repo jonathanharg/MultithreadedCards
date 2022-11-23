@@ -40,7 +40,7 @@ class CardGameTest {
   }
 
   @Test
-  void deal() throws Exception {
+  void dealTest() throws Exception {
     CardGame game;
     game =
         new CardGame(
@@ -82,7 +82,6 @@ class CardGameTest {
     TestUtilities.filesEqual("tests/resources/correct_player2.txt", "player2_output.txt");
   }
 
-
   @Test
   void limitTest() throws Exception {
     Random random = new Random();
@@ -96,6 +95,16 @@ class CardGameTest {
       assertNotNull(TestUtilities.getPrivateField(game, "winner"));
       new File("./deck" + n + "_generated.txt").delete();
     }
+  }
+
+  @ParameterizedTest
+  @ValueSource(
+          strings = {"1pl_whitespace_deck.txt", "2pl_simple.txt", "3pl_instant_win.txt", "5pl.txt"})
+  void threadRunsTest(String deck) throws Exception {
+    File local = new File(System.getProperty("user.dir"));
+    CardGame game = new CardGame(deck.charAt(0) - '0', Path.of(local + "/tests/resources/" + deck));
+    game.runThreadedGame();
+    assertFalse(game.isRunning());
   }
 
   void generateValidDeck(int n) throws IOException {

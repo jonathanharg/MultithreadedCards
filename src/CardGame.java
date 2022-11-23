@@ -14,6 +14,7 @@ public class CardGame {
   private final Deck[] decks;
   private final Player[] players;
 
+  private Player winner = null;
   private volatile boolean playerHasWon = false;
 
   public CardGame(int n, Path packPath) throws InvalidPackException, InvalidPlayerNumberException {
@@ -53,6 +54,8 @@ public class CardGame {
         cardGame.runThreadedGame();
       } catch (InvalidPackException | InvalidPlayerNumberException e) {
         System.out.println(e.getMessage());
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
       }
     }
   }
@@ -96,13 +99,8 @@ public class CardGame {
     // Called when a player has a winning hand, it is then verified if they have won or not
     if (!playerHasWon) {
       playerHasWon = true;
+      winner = player;
       System.out.println(player + " has won! 🥳😹");
-      for (int i = 0; i < n; i++) {
-        players[i].finalLog(player);
-        decks[i]
-            .createFinalLog(); // TODO: MAY BE BUGGED! WAIT FOR THE END OF EACH PLAYERS TURN BEFORE
-                               // PRINTING DECKS
-      }
     }
   }
 
@@ -157,7 +155,7 @@ public class CardGame {
     }
   }
 
-  public void runThreadedGame() {
+  public void runThreadedGame() throws InterruptedException {
     checkForInstantWin();
     if (playerHasWon) return;
 
@@ -166,20 +164,26 @@ public class CardGame {
     for (int i = 0; i < n; i++) {
       threads[i] = new Thread(players[i]);
     }
-
-<<<<<<< HEAD
     // Runs each player.
     // The creation and running are separated into two different loops so player 1 doesn't
     // get a significant advantage by running before all the other players threads are even
     // created.
-=======
-    // Runs each player
-    // creation and running are seperated into two different loops so player 1 doesn't get a large
-    // advantage by running
-    // before all the other players threads are even created.
->>>>>>> 1838c2889c5d9617407f138364350f74013d3609
     for (int i = 0; i < n; i++) {
       threads[i].start();
+    }
+
+    // Try join every thread if it hasn't already terminated. This way we make sure every
+    // player has finished their turns before creating their logs and the logs for the
+    // decks.
+    for (int i = 0; i < n; i++) {
+      if (Thread.State.TERMINATED != threads[i].getState()) {
+        threads[i].join();
+      }
+    }
+
+    for (int i = 0; i < n; i++) {
+      players[i].logWinner(winner);
+      decks[i].createFinalLog();
     }
   }
 
@@ -196,7 +200,7 @@ public class CardGame {
     }
   }
 
-  public void runSequentialGame() {
+  public void runSequentialGame() throws InterruptedException {
     checkForInstantWin();
     while (!playerHasWon) {
       // each player takes a turn in sequential order until one of them wins
@@ -206,6 +210,10 @@ public class CardGame {
           claimVictoryFor(players[i]);
         }
       }
+    }
+    for (int i = 0; i < n; i++) {
+      players[i].logWinner(winner);
+      decks[i].createFinalLog();
     }
   }
 

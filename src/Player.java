@@ -49,11 +49,11 @@ public class Player implements Runnable {
     }
   }
 
-  public void takeTurn() {
+  public void takeTurn() throws InterruptedException {
     // All the actions that make up a players turn. Should be treated as atomic, and should not be
     // interrupted.
-    try {
-      Card newCard = drawDeck.takeCard();
+    Card newCard = drawDeck.takeCard();
+    if (null != newCard) { // if the card is null then the deck is probably empty, so end our turn.
       log(this + " draws a " + newCard + " from " + drawDeck);
       Card discardCard = selectDiscardCard();
       if (null == discardCard) {
@@ -66,8 +66,6 @@ public class Player implements Runnable {
       discardDeck.addCard(discardCard);
       log(this + " discards a " + discardCard + " to " + discardDeck);
       log(this + " current hand is " + handToString());
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
     }
   }
 
@@ -86,7 +84,7 @@ public class Player implements Runnable {
     log(message, APPEND); // Log appends by default unless otherwise stated.
   }
 
-  public void finalLog(Player winner) {
+  public void logWinner(Player winner) {
     if (winner == this) {
       log(this + " wins");
     } else {
@@ -124,7 +122,11 @@ public class Player implements Runnable {
   @Override
   public void run() {
     while (CardGame.currentGame.isRunning()) {
-      takeTurn();
+      try {
+        takeTurn();
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
       if (hasWinningHand()) {
         CardGame.currentGame.claimVictoryFor(this);
       }

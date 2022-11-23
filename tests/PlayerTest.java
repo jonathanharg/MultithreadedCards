@@ -96,7 +96,7 @@ class PlayerTest {
 
   @Test
   void swapCardByObjTest() {
-    //tests that cards can be swapped when given their object
+    // tests that cards can be swapped when given their object
     Card a = new Card(1738);
     Card b = new Card(21);
     player.addCard(a, 0);
@@ -119,7 +119,7 @@ class PlayerTest {
   @ParameterizedTest
   @MethodSource("selectDiscardCardGenerator")
   void selectDiscardCard(Card[] cards, Integer value) throws Exception {
-    //tests that cards can be discarded successfully
+    // tests that cards can be discarded successfully
     for (int i = 0; 4 > i; i++) {
       player.addCard(cards[i], i);
     }

@@ -26,12 +26,14 @@ Please enter the number of players:
 
 then, when prompted, give a valid number of players and a `deckfile`.
 
-> Note. a `deckfile` must be valid for a given number of players, and can either 
+> Note. a `deckfile` must be valid for a given number of players, and can either
 > be a relative or absolute path.
 
 ## Testing
 
-Compile the tests with the [Junit Platform Console Standalone jar](https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/).
+Compile the tests with
+the [Junit Platform Console Standalone jar](https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/)
+.
 Version 1.9.1 of the Junit Platform Console will be used in following examples.
 
 > Note. for release builds Junit Platform Console is already provided and the tests

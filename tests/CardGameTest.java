@@ -7,11 +7,17 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class CardGameTest {
+
+  @AfterEach
+  void afterEach() {
+    TestUtilities.clean();
+  }
 
   @ParameterizedTest
   @ValueSource(ints = {Integer.MIN_VALUE, 0, -1, -5})
@@ -62,7 +68,6 @@ class CardGameTest {
     File local = new File(System.getProperty("user.dir"));
     CardGame game = new CardGame(deck.charAt(0) - '0', Path.of(local + "/tests/resources/" + deck));
     game.runThreadedGame();
-    Thread.sleep(500); // wait for game to finish
   }
 
   @Test
@@ -75,13 +80,7 @@ class CardGameTest {
       generateValidDeck(n);
       CardGame game = new CardGame(n, Path.of("./deck" + n + "_generated.txt"));
       game.runThreadedGame();
-      while (game.isRunning()) {
-        Thread.sleep(500);
-      }
-
-      Thread.sleep(2000);
-      //      assertNotNull(TestUtilities.getPrivateField(game, "winner"));
-
+      assertNotNull(TestUtilities.getPrivateField(game, "winner"));
       new File("./deck" + n + "_generated.txt").delete();
     }
   }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class Deck {
 
@@ -31,7 +32,8 @@ public class Deck {
 
   public Card takeCard() throws InterruptedException {
     // Take blocks the current thread until the queue is unlocked and a card is available.
-    return cards.take();
+    // or returns null after 200 milliseconds of waiting.
+    return cards.poll(200, TimeUnit.MILLISECONDS);
   }
 
   public void createFinalLog() {

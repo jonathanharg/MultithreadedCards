@@ -40,7 +40,6 @@ Version 1.9.1 of the Junit Platform Console will be used in following examples.
 > have already been compiled.
 
 ```shell
-javac -cp ./src/*.java ./tests/*.java
 javac -cp junit-platform-console-standalone-1.9.1.jar ./src/*.java ./tests/*.java
 ```
 

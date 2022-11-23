@@ -61,8 +61,8 @@ public class CardGame {
   }
 
   private static int getNumberOfPlayers() {
+    Scanner scanner = new Scanner(System.in);
     while (true) {
-      Scanner scanner = new Scanner(System.in);
       // Keeps asking for a number until a valid one is provided
       System.out.println("Please enter the number of players:");
       try {
@@ -76,9 +76,10 @@ public class CardGame {
         }
       } catch (InputMismatchException | InvalidPlayerNumberException e) {
         // only allows the user to enter a positive number of players
-        System.out.println("The number of players must be a positive integer! " + e.getMessage());
+        System.out.println("The number of players must be a positive integer! ");
+        if (null != e.getMessage()) System.out.println(e.getMessage());
+        scanner.reset();
       }
-      scanner.close();
     }
   }
 
@@ -86,9 +87,8 @@ public class CardGame {
     // takes in the path of the deck from the user, note. the deck is not necessarily valid yet
     Scanner scanner = new Scanner(System.in);
     System.out.println("Please enter the location of the pack to load:");
-    Path path = Path.of(scanner.nextLine());
-    scanner.close();
-    return path;
+    String input = scanner.nextLine();
+    return Path.of(input);
   }
 
   public boolean isRunning() {
@@ -113,25 +113,34 @@ public class CardGame {
     } catch (IOException e) {
       throw new InvalidPackException("Error loading pack %s".formatted(packPath), e);
     }
-    // checks that the deck given is the correct length
-    if (lines.size() != 8 * n) {
-      String errorString = "A decks length must be 8n (%d), but the supplied deck was %s.";
-      throw new InvalidPackException(errorString.formatted(8 * n, lines.size()));
-    }
 
-    for (int i = 0; i < lines.size(); i++) {
-      try {
-        int cardValue = Integer.parseInt(lines.get(i));
-        if (0 > cardValue) {
-          throw new NumberFormatException();
-        }
-        cards[i] = new Card(cardValue);
-      } catch (NumberFormatException e) {
-        // each card value must be a positive integer, e.g. not a string or -2
-        String errorString =
-            "Invalid card value on line %d of %s. Each line must be a non-negative integer.";
-        throw new InvalidPackException(errorString.formatted(i, packPath.toString()));
+    int cardIndex = 0;
+    int lineIndex = 0;
+    while (cardIndex < 8 * n) {
+      if (lineIndex > lines.size()) {
+        // We have reached the end of the file, but we don't have enough cards since
+        // our cardIndex < 8n
+        String errorString = "A decks must have 8n (%d) cards, but the supplied deck only had %d.";
+        throw new InvalidPackException(errorString.formatted(8 * n, cardIndex));
       }
+
+      // Ignore whitespace
+      if (!lines.get(lineIndex).isBlank()) {
+        try {
+          int cardValue = Integer.parseInt(lines.get(lineIndex));
+          if (0 > cardValue) {
+            throw new NumberFormatException();
+          }
+          cards[cardIndex] = new Card(cardValue);
+          cardIndex++;
+        } catch (NumberFormatException e) {
+          // each card value must be a positive integer, e.g. not a string or -2
+          String errorString =
+              "Invalid card value on line %d of %s. Each line must be a non-negative integer.";
+          throw new InvalidPackException(errorString.formatted(lineIndex, packPath.toString()));
+        }
+      }
+      lineIndex++;
     }
     return cards;
   }

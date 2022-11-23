@@ -63,8 +63,9 @@ class CardGameTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"2pl_simple.txt", "3pl_instant_win.txt", "5pl.txt"})
-  void Test2PlayerSimple(String deck) throws Exception {
+  @ValueSource(
+      strings = {"1pl_whitespace_deck.txt", "2pl_simple.txt", "3pl_instant_win.txt", "5pl.txt"})
+  void testPremadeDecks(String deck) throws Exception {
     File local = new File(System.getProperty("user.dir"));
     CardGame game = new CardGame(deck.charAt(0) - '0', Path.of(local + "/tests/resources/" + deck));
     game.runThreadedGame();

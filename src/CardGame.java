@@ -190,6 +190,7 @@ public class CardGame {
       }
     }
 
+    // Creates final logs once for Players and Decks once every thread has finished.
     for (int i = 0; i < n; i++) {
       players[i].logWinner(winner);
       decks[i].createFinalLog();

@@ -20,7 +20,6 @@ class DeckTest {
   void beforeEach() throws Exception {
     // adds cards to the deck before each test
     deck = new Deck(1);
-
     deck.addCard(new Card(1));
     deck.addCard(new Card(7));
     deck.addCard(new Card(2));
@@ -35,7 +34,7 @@ class DeckTest {
 
   @Test
   void testAddCard() throws IOException {
-    // tests that addCard() used in the before correctly adds cards to the deck in the right order.
+    // tests that addCard() used in @BeforeEach correctly adds cards to the deck in the right order.
     deck.createFinalLog();
     assertTrue(TestUtilities.fileEqualsString("deck 1 contents: 1 7 2 9", "deck1_output.txt"));
   }

@@ -91,6 +91,7 @@ class CardGameTest {
     // testing that the file outputs are correct once the game has finished.
     File local = new File(System.getProperty("user.dir"));
     CardGame game = new CardGame(2, Path.of(local + "/tests/resources/2pl_simple.txt"));
+    // we run this sequentially rather than with threads as the outcome is determinate.
     game.runSequentialGame();
     assertTrue(TestUtilities.filesEqual("tests/resources/correct_deck1.txt", "deck1_output.txt"));
     assertTrue(TestUtilities.filesEqual("tests/resources/correct_deck2.txt", "deck2_output.txt"));

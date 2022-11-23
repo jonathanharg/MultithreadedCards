@@ -41,7 +41,7 @@ class DeckTest {
 
   @Test
   void takeCard() throws Exception {
-    //tests that the contents of a deck are as expected.
+    // tests that the contents of a deck are as expected.
     assertEquals(1, deck.takeCard().getValue());
     assertEquals(7, deck.takeCard().getValue());
     assertEquals(2, deck.takeCard().getValue());

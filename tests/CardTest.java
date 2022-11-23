@@ -1,11 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class CardTest {
   @Test
@@ -32,5 +30,4 @@ class CardTest {
     List<Card> hand = Arrays.asList(new Card(1), new Card(9), new Card(8), new Card(4));
     assertEquals("1 9 8 4", Card.StreamToString(hand.stream()));
   }
-
 }

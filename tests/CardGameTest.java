@@ -22,7 +22,7 @@ class CardGameTest {
   @ParameterizedTest
   @ValueSource(ints = {Integer.MIN_VALUE, 0, -1, -5, -10})
   void invalidPlayerInput(int playerNumbers) {
-    //tests that an in valid player input is thrown when creating a game
+    // tests that an in valid player input is thrown when creating a game
     assertThrows(
         CardGame.InvalidPlayerNumberException.class,
         () -> new CardGame(playerNumbers, Path.of(".nonExistentDeck")));
@@ -43,7 +43,7 @@ class CardGameTest {
 
   @Test
   void dealTest() throws Exception {
-    //tests that the deal function works correctly and deals cards in a round-robin fashion
+    // tests that the deal function works correctly and deals cards in a round-robin fashion
     CardGame game;
     game =
         new CardGame(
@@ -52,13 +52,13 @@ class CardGameTest {
     Player[] players = (Player[]) TestUtilities.getPrivateField(game, "players");
     Deck[] decks = (Deck[]) TestUtilities.getPrivateField(game, "decks");
 
-    //firstly we test that the first half of the pack- are players' hands are as they should be?
+    // firstly we test that the first half of the pack - are players' hands are as they should be?
     assertEquals("1 4 7 10", players[0].handToString());
     assertEquals("2 5 8 11", players[1].handToString());
     assertEquals("3 6 9 12", players[2].handToString());
 
-    //secondly we test the second half of the pack- are the deck contents correct despite using storing them
-    // in a queue?
+    // secondly we test the second half of the pack - are the deck contents correct despite using
+    // storing them in a queue?
     for (int i = 0; 3 > i; i++) {
       decks[i].createFinalLog();
     }
@@ -81,9 +81,11 @@ class CardGameTest {
   @Test
   void loadPackTest() {
     File local = new File(System.getProperty("user.dir"));
-    assertThrows(CardGame.InvalidPackException.class, () -> {
-      CardGame game = new CardGame(5, Path.of(local + "/tests/resources/2pl_simple.txt"));
-    });
+    assertThrows(
+        CardGame.InvalidPackException.class,
+        () -> {
+          CardGame game = new CardGame(5, Path.of(local + "/tests/resources/2pl_simple.txt"));
+        });
   }
 
   @Test
@@ -95,13 +97,15 @@ class CardGameTest {
     game.runSequentialGame();
     assertTrue(TestUtilities.filesEqual("tests/resources/correct_deck1.txt", "deck1_output.txt"));
     assertTrue(TestUtilities.filesEqual("tests/resources/correct_deck2.txt", "deck2_output.txt"));
-    assertTrue(TestUtilities.filesEqual("tests/resources/correct_player1.txt", "player1_output.txt"));
-    assertTrue(TestUtilities.filesEqual("tests/resources/correct_player2.txt", "player2_output.txt"));
+    assertTrue(
+        TestUtilities.filesEqual("tests/resources/correct_player1.txt", "player1_output.txt"));
+    assertTrue(
+        TestUtilities.filesEqual("tests/resources/correct_player2.txt", "player2_output.txt"));
   }
 
   @Test
   void limitTest() throws Exception {
-    //testing the limits of the game with random values 5 times.
+    // testing the limits of the game with random values 5 times.
     Random random = new Random();
     int max = 5;
     for (int i = 0; max > i; i++) {
@@ -117,9 +121,9 @@ class CardGameTest {
 
   @ParameterizedTest
   @ValueSource(
-          strings = {"1pl_whitespace_deck.txt", "2pl_simple.txt", "3pl_instant_win.txt", "5pl.txt"})
+      strings = {"1pl_whitespace_deck.txt", "2pl_simple.txt", "3pl_instant_win.txt", "5pl.txt"})
   void threadRunsTest(String deck) throws Exception {
-    // testing that the thread stop running once the game has finnished.
+    // testing that the thread stop running once the game has finished.
     File local = new File(System.getProperty("user.dir"));
     CardGame game = new CardGame(deck.charAt(0) - '0', Path.of(local + "/tests/resources/" + deck));
     game.runThreadedGame();
@@ -127,7 +131,7 @@ class CardGameTest {
   }
 
   void generateValidDeck(int n) throws IOException {
-    //method to create a valid deck that is randomised but still allows a player to win
+    // method to create a valid deck that is randomised but still allows a player to win
     Random random = new Random();
     ArrayList<Integer> cards = new ArrayList<>();
     // for each player, four cards of its desired value are added to the deck

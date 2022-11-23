@@ -77,7 +77,7 @@ class PlayerTest {
   }
 
   @Test
-  void hasWinningHandTestNull(){
+  void hasWinningHandTestNull() {
     // test that the game can handle a winning hand test if a card is null
     player.addCard(null, 0);
     for (int i = 1; 4 > i; i++) {

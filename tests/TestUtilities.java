@@ -35,8 +35,9 @@ public class TestUtilities {
     File directory = new File(System.getProperty("user.dir"));
     String file1 = Files.readString(Paths.get(directory + "/" + textFile1));
     String file2 = Files.readString(Paths.get(directory + "/" + textFile2));
-
-    return file1.equals(file2);
+    System.out.println(file1);
+    System.out.println(file2);
+    return file2.equals(file1);
   }
 
   public static <T> Stream<Arguments> decksGenerator(int[][] decks, List<T> result) {

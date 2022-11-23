@@ -83,10 +83,10 @@ class CardGameTest {
     File local = new File(System.getProperty("user.dir"));
     CardGame game = new CardGame(2, Path.of(local + "/tests/resources/2pl_simple.txt"));
     game.runSequentialGame();
-    TestUtilities.filesEqual("tests/resources/correct_deck1.txt", "deck1_output.txt");
-    TestUtilities.filesEqual("tests/resources/correct_deck2.txt", "deck2_output.txt");
-    TestUtilities.filesEqual("tests/resources/correct_player1.txt", "player1_output.txt");
-    TestUtilities.filesEqual("tests/resources/correct_player2.txt", "player2_output.txt");
+    assertTrue(TestUtilities.filesEqual("tests/resources/correct_deck1.txt", "deck1_output.txt"));
+    assertTrue(TestUtilities.filesEqual("tests/resources/correct_deck2.txt", "deck2_output.txt"));
+    assertTrue(TestUtilities.filesEqual("tests/resources/correct_player1.txt", "player1_output.txt"));
+    assertTrue(TestUtilities.filesEqual("tests/resources/correct_player2.txt", "player2_output.txt"));
   }
 
   @Test

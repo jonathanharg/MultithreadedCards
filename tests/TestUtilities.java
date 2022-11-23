@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.Arguments;
 
 public class TestUtilities {
   public static void clean() {
+    // deletes all the files that end with _output.txt
+    // includes deck and player outputs
     File directory = new File(System.getProperty("user.dir"));
     for (File f : Objects.requireNonNull(directory.listFiles())) {
       if (f.getName().endsWith("_output.txt")) {
@@ -21,6 +23,7 @@ public class TestUtilities {
   }
 
   public static boolean fileEqualsString(String actual, String textFile) throws IOException {
+    // tests that file contents are equal to a string
     File directory = new File(System.getProperty("user.dir"));
     String file = Files.readString(Paths.get(directory + "/" + textFile));
 
@@ -28,6 +31,7 @@ public class TestUtilities {
   }
 
   public static boolean filesEqual(String textFile1, String textFile2) throws IOException {
+    // tests that a file is equal to another file
     File directory = new File(System.getProperty("user.dir"));
     String file1 = Files.readString(Paths.get(directory + "/" + textFile1));
     String file2 = Files.readString(Paths.get(directory + "/" + textFile2));
@@ -36,6 +40,7 @@ public class TestUtilities {
   }
 
   public static <T> Stream<Arguments> decksGenerator(int[][] decks, List<T> result) {
+    //
     AtomicInteger i = new AtomicInteger();
     return Arrays.stream(decks)
         .map(
@@ -49,6 +54,7 @@ public class TestUtilities {
 
   public static Object getPrivateField(Object obj, String field)
       throws NoSuchFieldException, IllegalAccessException {
+    // allows a test to access private fields of an object.
     var privateField = obj.getClass().getDeclaredField(field);
     privateField.setAccessible(true);
     return privateField.get(obj);
@@ -56,6 +62,7 @@ public class TestUtilities {
 
   public static Object runPrivateMethod(Object obj, String method, Object... params)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    // allows a test to access a private method of an object.
     var privateMethod = obj.getClass().getDeclaredMethod(method);
     privateMethod.setAccessible(true);
     return privateMethod.invoke(obj, params);

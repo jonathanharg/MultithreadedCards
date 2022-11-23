@@ -20,6 +20,7 @@ class PlayerTest {
 
   private static Stream<Arguments> hasWonGenerator() {
     // generates decks, including ones that have won.
+    // it then stores the results of whether the decks have won or not.
     int[][] decks =
         new int[][] {
           {1, 2, 3, 4}, {2, 2, 2, 2}, {1, 1, 1, 1}, {1, 1, 1, 3},
@@ -29,7 +30,8 @@ class PlayerTest {
   }
 
   private static Stream<Arguments> selectDiscardCardGenerator() {
-    // generates discard cards.
+    // generates a some random decks
+    // allocates a card from each deck to be discarded - this is used in other tests
     int[][] decks =
         new int[][] {
           {2, 2, 2, 2},
@@ -46,12 +48,13 @@ class PlayerTest {
 
   @BeforeAll
   static void beforeAll() {
-    // ensures everything is cleaned before all tests.
+    // ensures utilities are cleaned before all tests.
     TestUtilities.clean();
   }
 
   @AfterEach
   void afterEach() {
+    // ensures utilities are cleaned before each test.
     TestUtilities.clean();
   }
 
@@ -65,7 +68,8 @@ class PlayerTest {
   @ParameterizedTest
   @MethodSource("hasWonGenerator")
   void hasWonTest(Card[] cards, boolean value) {
-    // tests that the hasWinningHand boolean is true when a player has won.
+    // tests that the game recognises when a player has won.
+    // uses the hasWonGenerator
     for (int i = 0; 4 > i; i++) {
       player.addCard(cards[i], i);
     }
@@ -74,6 +78,7 @@ class PlayerTest {
 
   @Test
   void createLogTest() {
+    // tests that logs are successfully created
     player.log("Testing Log!", CREATE, TRUNCATE_EXISTING);
     assertTrue(new File("./player1_output.txt").isFile());
     assertTrue(0 < new File("./player1_output.txt").length());
@@ -81,6 +86,7 @@ class PlayerTest {
 
   @Test
   void appendLogTest() {
+    // tests that a player can add another line to its log successfully
     createLogTest();
     var length = new File("./player1_output.txt").length();
     player.log("Add another line!");
@@ -89,6 +95,7 @@ class PlayerTest {
 
   @Test
   void addCardTest() {
+    // tests that a card can be added to a player's hand.
     Card card = new Card(93751934);
     player.addCard(card, 0);
     assertTrue(player.handToString().contains(String.valueOf(card.getValue())));
@@ -129,10 +136,10 @@ class PlayerTest {
 
   @Test
   void selectDiscardCardNull() throws Exception {
+    //
     for (int i = 0; 4 > i; i++) {
       player.addCard(new Card(1), i);
     }
-
     Card discardCard = (Card) TestUtilities.runPrivateMethod(player, "selectDiscardCard");
     assertNull(discardCard);
   }

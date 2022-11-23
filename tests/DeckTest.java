@@ -18,6 +18,7 @@ class DeckTest {
 
   @BeforeEach
   void beforeEach() throws Exception {
+    // adds cards to the deck before each test
     deck = new Deck(1);
 
     deck.addCard(new Card(1));
@@ -28,18 +29,20 @@ class DeckTest {
 
   @AfterEach
   void afterEach() {
+    // clears the test utilities after each test
     TestUtilities.clean();
   }
 
   @Test
   void testAddCard() throws IOException {
+    // tests that addCard() used in the before correctly adds cards to the deck in the right order.
     deck.createFinalLog();
     assertTrue(TestUtilities.fileEqualsString("deck 1 contents: 1 7 2 9", "deck1_output.txt"));
   }
 
   @Test
   void takeCard() throws Exception {
-
+    //tests that the contents of a deck are as expected.
     assertEquals(1, deck.takeCard().getValue());
     assertEquals(7, deck.takeCard().getValue());
     assertEquals(2, deck.takeCard().getValue());
@@ -51,6 +54,7 @@ class DeckTest {
 
   @Test
   void testCreateFinalLog() throws Exception {
+    // tests that the final log of a deck is correct.
     deck.createFinalLog();
     assertTrue(TestUtilities.fileEqualsString("deck 1 contents: 1 7 2 9", "deck1_output.txt"));
   }

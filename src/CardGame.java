@@ -100,7 +100,7 @@ public class CardGame {
     if (!playerHasWon) {
       playerHasWon = true;
       winner = player;
-      System.out.println(player + " has won! 🥳😹");
+      System.out.println(player + " has won! 🥳");
     }
   }
 
